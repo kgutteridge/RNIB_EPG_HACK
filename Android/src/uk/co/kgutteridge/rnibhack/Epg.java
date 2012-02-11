@@ -73,16 +73,16 @@ public class Epg extends Activity {
         
         Reader reader = new InputStreamReader(source);
         
-        response = (ChannelResponse)new Gson().fromJson(reader, ChannelResponse.class);  
-        Log.i("TAG", "channels " + response.channels);
+        response = new Gson().fromJson(reader, ChannelResponse.class);  
+//        Log.i("TAG", "channels " + response.channels.size());
 
-//        channelsRetrieved = new ArrayList<Channel>();
-//		Iterator<Channel> i = response.channelsList.iterator();
-//		while (i.hasNext()) {
-//			Channel res = (Channel) i.next();
-//			Log.i("TAG", "channel " + res.title);
-//			channelsRetrieved.add(res);
-//		}
+        channelsRetrieved = new ArrayList<Channels>();
+		Iterator<Channels> i = response.channels.iterator();
+		while (i.hasNext()) {
+			Channels res = (Channels) i.next();
+			Log.i("TAG", "channel " + res.title);
+			channelsRetrieved.add(res);
+		}
         
         lv.setAdapter(new ChannelAdapter(this));
     }
