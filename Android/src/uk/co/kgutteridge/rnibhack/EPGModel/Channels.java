@@ -2,7 +2,7 @@ package uk.co.kgutteridge.rnibhack.EPGModel;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Channel
+public class Channels
 {
 	@SerializedName("channelno")
 	public String channelNo;

@@ -3,6 +3,12 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"    
     android:orientation="vertical" >
+
+   <LinearLayout
+        android:id="@+id/header	"
+        android:layout_width="fill_parent"
+        android:background="#df3232"
+    	android:layout_height="60dp"  />
     
     <ListView
         android:id="@+id/list"
