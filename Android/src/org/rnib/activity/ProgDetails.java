@@ -1,14 +1,15 @@
-package uk.co.kgutteridge.app;
+package org.rnib.activity;
 
 import java.util.ArrayList;
 
-import uk.co.kgutteridge.rnibhack.R;
-import uk.co.kgutteridge.rnibhack.EPGModel.ChannelRetriever.RetrieverCallback;
-import uk.co.kgutteridge.rnibhack.EPGModel.Channels;
+import org.rnib.R;
+import org.rnib.coms.ChannelRetriever.ChannelsRetrievedCallback;
+import org.rnib.model.channels.Channels;
+
 import android.app.Activity;
 import android.os.Bundle;
 
-public class ProgDetails extends Activity implements RetrieverCallback {
+public class ProgDetails extends Activity implements ChannelsRetrievedCallback {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

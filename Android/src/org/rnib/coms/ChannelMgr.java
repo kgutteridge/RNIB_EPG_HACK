@@ -1,39 +1,40 @@
-package uk.co.kgutteridge.rnibhack.EPGModel;
+package org.rnib.coms;
 
 import java.util.ArrayList;
 
-import uk.co.kgutteridge.rnibhack.EPGModel.ChannelRetriever.RetrieverCallback;
+import org.rnib.coms.ChannelRetriever.ChannelsRetrievedCallback;
+import org.rnib.model.channels.Channels;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-public class ServicesMgr {
+public class ChannelMgr {
 
 	private final ChannelRetriever channelretriver;
-	public ArrayList<Channels> channelsRetrieved = new ArrayList<Channels>();
+	public ArrayList<Channels> channels = new ArrayList<Channels>();
 	
 	private BroadcastReceiver channelReceiver = new BroadcastReceiver() {
 		@Override
 		public void onReceive(Context paramContext, Intent paramIntent) {
-			update();
+			refreshShownChannels();
 		}
 	};
 	
-	public ServicesMgr(RetrieverCallback letMeKnow) {
+	public ChannelMgr(ChannelsRetrievedCallback letMeKnow) {
 		channelretriver = new ChannelRetriever(letMeKnow);
 	}
 	
-	public void update() {
-		Log.i("TAG", "retrieving channels from manager");
+	public void refreshShownChannels() {
 		channelretriver.retrieveChannels();
 	}
 	
-	public BroadcastReceiver getReciever() {
+	public BroadcastReceiver getChannelShownReciever() {
 		return channelReceiver;
 	}
 
-	public void updateResults(ArrayList<Channels> result) {
-		channelsRetrieved = result;
+	public void updateShownChannels(ArrayList<Channels> result) {
+		channels = result;
 	}
 }

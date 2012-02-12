@@ -1,4 +1,4 @@
-package uk.co.kgutteridge.rnibhack.EPGModel;
+package org.rnib.coms;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,16 +12,13 @@ import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import uk.co.kgutteridge.app.EPGApp;
-import uk.co.kgutteridge.rnibhack.R;
-import android.app.Application;
-import android.content.Intent;
-import android.net.Uri;
+import org.rnib.R;
+import org.rnib.app.SkyEPG;
+import org.rnib.model.channels.Channels;
+
 import android.util.Log;
 
-import com.akshay.http.service.HttpIntentService;
 import com.akshay.http.service.ResultHandler;
-import com.akshay.http.service.builders.ServiceIntentBuilder;
 import com.akshay.http.service.constants.HttpStatusCodes;
 import com.google.gson.Gson;
 
@@ -38,9 +35,9 @@ public class ChannelRetriever {
 		final String QUERY = "";
 	}
 
-	private RetrieverCallback callback;
+	private ChannelsRetrievedCallback callback;
 
-	public ChannelRetriever(RetrieverCallback callback) {
+	public ChannelRetriever(ChannelsRetrievedCallback callback) {
 		this.callback = callback;
 	}
 
@@ -82,7 +79,6 @@ public class ChannelRetriever {
 
 		@Override
 		public void onFailure(int resultCode, Exception e) {
-			Log.i("TAG", "result came failing");
 			e.printStackTrace();
 			callback.onDownloadFailure("Failed to retrieve");
 		}
@@ -104,7 +100,7 @@ public class ChannelRetriever {
 //		EPGApp.getContext().startService(intent);
 		
 		//Canned response.
-		InputStream is = EPGApp.getContext().getResources().openRawResource(R.raw.init);
+		InputStream is = SkyEPG.getContext().getResources().openRawResource(R.raw.init);
 		Writer writer = new StringWriter();
 		char[] buffer = new char[1024];
 		try {
@@ -152,7 +148,7 @@ public class ChannelRetriever {
 		}
 	}
 	
-	public interface RetrieverCallback {
+	public interface ChannelsRetrievedCallback {
 		public void onDownloadSuccess(ArrayList<Channels> result);
 		public void onDownloadFailure(String message);
 		public void onConnectionTimeOut();

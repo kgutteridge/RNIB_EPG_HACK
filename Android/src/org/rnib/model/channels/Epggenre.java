@@ -1,8 +1,8 @@
-package uk.co.kgutteridge.rnibhack.EPGModel;
+package org.rnib.model.channels;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Genre
+public class Epggenre
 {
 	@SerializedName("genreid")
 	public String genreid;

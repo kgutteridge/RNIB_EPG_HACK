@@ -1,29 +1,32 @@
-package uk.co.kgutteridge.rnibhack;
+package org.rnib.activity;
 
 import java.util.ArrayList;
 
-import uk.co.kgutteridge.rnibhack.EPGModel.ChannelRetriever.RetrieverCallback;
-import uk.co.kgutteridge.rnibhack.EPGModel.Channels;
-import uk.co.kgutteridge.rnibhack.EPGModel.ServicesMgr;
+import org.rnib.R;
+import org.rnib.coms.ChannelMgr;
+import org.rnib.coms.ChannelRetriever.ChannelsRetrievedCallback;
+import org.rnib.model.channels.Channels;
+
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 
-public class Epg extends Activity implements RetrieverCallback {
+public class Epg extends Activity implements ChannelsRetrievedCallback {
 
     private Context mContext;
     
-	String url = "http://epgservices.sky.com/tvlistings-proxy/TVListingsProxy/init.json";
-
-	private ServicesMgr servicesMgr = new ServicesMgr(this);
+	private ChannelMgr servicesMgr = new ChannelMgr(this);
 
 	private ListView lv;
 
@@ -41,19 +44,19 @@ public class Epg extends Activity implements RetrieverCallback {
     	super.onResume();
 		channelAdapter = new ChannelAdapter(this, servicesMgr);
 		lv.setAdapter(channelAdapter);
-        servicesMgr.update(); 
+        servicesMgr.refreshShownChannels(); 
     }
     
     private class ChannelAdapter extends BaseAdapter {
-    	private ServicesMgr mgr;
+    	private ChannelMgr mgr;
     	
-        public ChannelAdapter(Context context, ServicesMgr mgr) {
+        public ChannelAdapter(Context context, ChannelMgr mgr) {
         	this.mgr=mgr;
             mContext = context;
         }
 
         public int getCount() {
-            return servicesMgr.channelsRetrieved.size();
+            return servicesMgr.channels.size();
         }
 
         public Object getItem(int position) {
@@ -72,15 +75,22 @@ public class Epg extends Activity implements RetrieverCallback {
             } else {
                 tv = (TextView) convertView;
             }
-            tv.setText(servicesMgr.channelsRetrieved.get(position).title);
+            tv.setText(servicesMgr.channels.get(position).title);
+            tv.setOnClickListener(new OnClickListener() {
+				public void onClick(View v) {
+					startActivity(new Intent(Epg.this, ProgDetails.class));
+				}
+			});
+            
             return tv;
         }
+
     }
 
 	public void onDownloadSuccess(ArrayList<Channels> result) {
 		
 		if(result.size() > 0){
-			servicesMgr.updateResults((ArrayList<Channels>) result);
+			servicesMgr.updateShownChannels((ArrayList<Channels>) result);
 			channelAdapter.notifyDataSetChanged();
 			
 		} else{
