@@ -10,4 +10,6 @@
 
 @interface Channel : NSObject
 
+@property (nonatomic, retain) NSString *channelNo, *epgGenre, *title, *channelType, *channelID, *genre;
+
 @end

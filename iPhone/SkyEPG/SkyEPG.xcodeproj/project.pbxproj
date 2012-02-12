@@ -17,6 +17,7 @@
 		FD3C568714E73CE400190670 /* AFURLConnectionOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = FD3C567B14E73CE400190670 /* AFURLConnectionOperation.m */; };
 		FD3C568814E73CE400190670 /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = FD3C567D14E73CE400190670 /* AFXMLRequestOperation.m */; };
 		FD3C568914E73CE400190670 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = FD3C567F14E73CE400190670 /* UIImageView+AFNetworking.m */; };
+		FD3C569014E7403A00190670 /* Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = FD3C568F14E7403A00190670 /* Channel.m */; };
 		FD4F060714E7271200A3B8FF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD4F060614E7271200A3B8FF /* UIKit.framework */; };
 		FD4F060914E7271200A3B8FF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD4F060814E7271200A3B8FF /* Foundation.framework */; };
 		FD4F060B14E7271200A3B8FF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD4F060A14E7271200A3B8FF /* CoreGraphics.framework */; };
@@ -61,6 +62,8 @@
 		FD3C567D14E73CE400190670 /* AFXMLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFXMLRequestOperation.m; sourceTree = "<group>"; };
 		FD3C567E14E73CE400190670 /* UIImageView+AFNetworking.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+AFNetworking.h"; sourceTree = "<group>"; };
 		FD3C567F14E73CE400190670 /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
+		FD3C568E14E7403A00190670 /* Channel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Channel.h; sourceTree = "<group>"; };
+		FD3C568F14E7403A00190670 /* Channel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Channel.m; sourceTree = "<group>"; };
 		FD4F060214E7271200A3B8FF /* SkyEPG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkyEPG.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD4F060614E7271200A3B8FF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		FD4F060814E7271200A3B8FF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -240,6 +243,8 @@
 			children = (
 				FD4F065814E7288700A3B8FF /* User.h */,
 				FD4F065914E7288700A3B8FF /* User.m */,
+				FD3C568E14E7403A00190670 /* Channel.h */,
+				FD3C568F14E7403A00190670 /* Channel.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -331,6 +336,7 @@
 				FD3C568714E73CE400190670 /* AFURLConnectionOperation.m in Sources */,
 				FD3C568814E73CE400190670 /* AFXMLRequestOperation.m in Sources */,
 				FD3C568914E73CE400190670 /* UIImageView+AFNetworking.m in Sources */,
+				FD3C569014E7403A00190670 /* Channel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

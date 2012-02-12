@@ -10,4 +10,6 @@
 
 @interface FirstViewController : UIViewController
 
+@property (nonatomic, retain) NSDictionary *channelIDs;
+
 @end

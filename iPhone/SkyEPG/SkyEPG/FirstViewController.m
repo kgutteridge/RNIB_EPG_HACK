@@ -8,6 +8,8 @@
 
 #import "FirstViewController.h"
 
+#import "AFNetworking.h"
+
 @implementation FirstViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -50,6 +52,23 @@
     NSURL *url = [NSURL URLWithString:@"http://epgservices.sky.com/tvlistings-proxy/TVListingsProxy/init.json"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
 
+    AFJSONRequestOperation *operation = [AFJSONRequestOperation JSONRequestOperationWithRequest:request 
+
+                                        success:^(NSURLRequest *request, NSHTTPURLResponse *response, id JSON) 
+                                        {
+                                            //NSLog(@"Channels: %@", [JSON valueForKeyPath:@"channels"]);
+                                            
+                                            NSDictionary *dictionary = [JSON objectForKey:@"channels"];
+                                            
+                                            NSLog(@"Dictionary %@",dictionary);
+                                            
+                                            
+                                            
+                                        } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error, id JSON) 
+                                         {
+                                             NSLog(@"Problem getting Sky init %@",error);
+                                         }];
+    [operation start];
     
     
 }
