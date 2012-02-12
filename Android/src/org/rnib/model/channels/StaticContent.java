@@ -4,8 +4,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class StaticContent
 {
-	
-	
 	@SerializedName("urlFindOutAboutGettingSky")
 	public String urlFindOutAboutGettingSky;
 	

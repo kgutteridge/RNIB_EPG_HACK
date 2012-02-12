@@ -2,13 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"    
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
-   <LinearLayout
+   <TextView
         android:id="@+id/header	"
         android:layout_width="fill_parent"
-        android:background="#df3232"
-    	android:layout_height="60dp"  />
+        android:layout_height="wrap_content"
+        android:text="On Tv Right now"
+        android:background="#151a54"
+        android:textColor="#fff600"
+        android:textSize="30dp" />
     
     <ListView
         android:id="@+id/list"

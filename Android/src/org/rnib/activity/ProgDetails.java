@@ -38,21 +38,26 @@ public class ProgDetails extends Activity implements ChannelsRetrievedCallback {
 		
 		TextView txt = (TextView) findViewById(R.id.prog_details_name);
 		txt.setText(intent.getStringExtra(Epg.BUNDLE_PROG_TITLE));
+		txt.setContentDescription(intent.getStringExtra(Epg.BUNDLE_PROG_TITLE));
 		
 		txt = (TextView) findViewById(R.id.prog_details_desc);
 		txt.setText(intent.getStringExtra(Epg.BUNDLE_PROG_DESC));
+		txt.setContentDescription(intent.getStringExtra(Epg.BUNDLE_PROG_DESC));
 		
 		txt = (TextView) findViewById(R.id.prog_details_channel);
 		txt.setText(intent.getStringExtra(Epg.BUNDLE_PROG_CHANNEL));
+		txt.setContentDescription(intent.getStringExtra(Epg.BUNDLE_PROG_CHANNEL));
 		
 		txt = (TextView) findViewById(R.id.prog_details_time);
 		String time = intent.getStringExtra(Epg.BUNDLE_PROG_TIME);
+		txt.setContentDescription(Epg.BUNDLE_PROG_TIME);
 		time = time.subSequence(0, time.length()-3).toString();
 		
 		Date expiry = new Date(Long.parseLong(time) * 1000);
 		Format formatter = new SimpleDateFormat("E, dd MMM HH:mm ");
 		
 		txt.setText(formatter.format(expiry));		
+		txt.setContentDescription(formatter.format(expiry));		
 	}
 
 	public void onDownloadSuccess(ArrayList<Channel> result) {

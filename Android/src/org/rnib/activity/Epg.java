@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -83,13 +84,17 @@ public class Epg extends Activity implements ChannelsRetrievedCallback, Programe
         }
 
         public View getView(final int position, View convertView, ViewGroup parent) {
-            TextView tv;
+        	LinearLayout li_channel;
+        	TextView title;
+        	TextView channel;
             if (convertView == null) {
-                tv = (TextView) LayoutInflater.from(mContext).inflate(
-                        android.R.layout.simple_list_item_1, parent, false);
+                li_channel = (LinearLayout) LayoutInflater.from(mContext).inflate(R.layout.li_channel, parent, false);
             } else {
-                tv = (TextView) convertView;
+                li_channel = (LinearLayout) convertView;
             }
+            
+            title = (TextView) li_channel.findViewById(R.id.li_channel_channel_title);
+            channel = (TextView) li_channel.findViewById(R.id.li_channel_programme_title);            
 
 //            if(channelServicesMgr.channels.get(position).channelID !=null){
 //            	if(channelsVar==null){
@@ -100,11 +105,14 @@ public class Epg extends Activity implements ChannelsRetrievedCallback, Programe
 //            }
             
             if(mgr.channels.get(position).programmes == null){
-            	tv.setText(channelServicesMgr.channels.get(position).title);
+            	channel.setText(channelServicesMgr.channels.get(position).title);
+            	channel.setContentDescription(channelServicesMgr.channels.get(position).title);
             }else{
-            	tv.setText(channelServicesMgr.channels.get(position).title + ":" + channelServicesMgr.channels.get(position).programmes.get(0).title);
-            	Log.i("TAG", "This is the channel ID: " + channelServicesMgr.channels.get(position).channelID);
-            	tv.setOnClickListener(new OnClickListener() {
+            	title.setText(channelServicesMgr.channels.get(position).programmes.get(0).title);
+            	title.setContentDescription(channelServicesMgr.channels.get(position).programmes.get(0).title);
+            	channel.setText(channelServicesMgr.channels.get(position).title);
+            	channel.setContentDescription(channelServicesMgr.channels.get(position).title);
+            	li_channel.setOnClickListener(new OnClickListener() {
             		public void onClick(View v) {
             			Intent programmeDetails = new Intent(Epg.this, ProgDetails.class);
             			programmeDetails.putExtra(BUNDLE_PROG_CHANNEL, channelServicesMgr.channels.get(position).title);
@@ -119,7 +127,7 @@ public class Epg extends Activity implements ChannelsRetrievedCallback, Programe
             
             
             
-            return tv;
+            return li_channel;
         }
 
     }

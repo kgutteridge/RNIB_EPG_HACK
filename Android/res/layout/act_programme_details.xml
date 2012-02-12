@@ -1,40 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"    
-    android:orientation="vertical" >
+    android:layout_height="fill_parent"
+    android:background="#151a54"    
+    android:orientation="vertical"
+    android:paddingLeft="14dp"
+    android:paddingRight="10dp"
+    android:paddingBottom="10dp" >
 
+    <ScrollView
+            android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    
+        <LinearLayout
+                android:layout_width="wrap_content"
+	    	android:layout_height="wrap_content"
+    	    android:orientation="vertical">
+        
    <LinearLayout
         android:id="@+id/header	"
-        android:layout_width="fill_parent"
-        android:background="#df3232"
-    	android:layout_height="60dp"  />
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"/>
    <TextView
         android:id="@+id/prog_details_channel"
+        android:textColor="#fff600"
+        android:layout_height="wrap_content"
         android:layout_width="fill_parent"
-        android:text="BBC1"
-    	android:layout_height="60dp"  />
+        android:textSize="32dp"
+        android:textStyle="bold"
+        android:text="BBC1"  />
    <TextView
         android:id="@+id/prog_details_name"
+        android:textColor="#fff600"
+        android:layout_height="wrap_content"
         android:layout_width="fill_parent"
-        android:text="Masterchef"
-    	android:layout_height="60dp"  />
+        android:textSize="38dp"
+        android:text="Masterchef" />
    <TextView
         android:id="@+id/prog_details_time"
+        android:textColor="#fff600"
+        android:layout_height="wrap_content"
         android:layout_width="fill_parent"
-        android:text="12:20"
-    	android:layout_height="60dp"  />
-   <Button
-        android:id="@+id/prog_details_btn_record"
-        android:layout_width="fill_parent"
-        android:text="Record"
-    	android:layout_height="60dp"  />
+        android:textSize="40dp"
+        android:text="12:20"  />
+
    <TextView
         android:id="@+id/prog_details_desc"
         android:layout_width="fill_parent"
-        android:text="blah blah  blah blahl sbssfois oih"
-    	android:layout_height="60dp"  />
-    
-
-
+        android:layout_height="wrap_content"
+        android:textColor="#fff600"
+        android:textSize="38dp"
+        android:text="blah blah  blah blahl sbssfois oih" />
+   
+   		</LinearLayout>
+   </ScrollView>
 </LinearLayout>

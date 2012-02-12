@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#151a54"    
+    android:paddingLeft="14dp"
+    android:paddingRight="10dp"
+    android:paddingBottom="10dp"
+    android:orientation="vertical" >
+
+   <TextView
+        android:id="@+id/li_channel_programme_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textColor="#fff600"
+        android:textSize="39sp"  />
+   <TextView
+        android:id="@+id/li_channel_channel_title"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="#fff600"
+        android:textSize="32sp"  />
+</LinearLayout>
