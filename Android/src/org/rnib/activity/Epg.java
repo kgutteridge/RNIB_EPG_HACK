@@ -5,28 +5,28 @@ import java.util.ArrayList;
 import org.rnib.R;
 import org.rnib.coms.ChannelMgr;
 import org.rnib.coms.ChannelRetriever.ChannelsRetrievedCallback;
+import org.rnib.coms.ProgrammeRetriever.ProgramesRetrievedCallback;
 import org.rnib.model.channels.Channels;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 
-public class Epg extends Activity implements ChannelsRetrievedCallback {
+public class Epg extends Activity implements ChannelsRetrievedCallback, ProgramesRetrievedCallback {
 
     private Context mContext;
     
-	private ChannelMgr servicesMgr = new ChannelMgr(this);
+	private ChannelMgr servicesMgr = new ChannelMgr(this, this);
 
 	private ListView lv;
 
@@ -49,6 +49,7 @@ public class Epg extends Activity implements ChannelsRetrievedCallback {
     
     private class ChannelAdapter extends BaseAdapter {
     	private ChannelMgr mgr;
+    	private String channelsVar;
     	
         public ChannelAdapter(Context context, ChannelMgr mgr) {
         	this.mgr=mgr;
@@ -75,6 +76,16 @@ public class Epg extends Activity implements ChannelsRetrievedCallback {
             } else {
                 tv = (TextView) convertView;
             }
+
+            if(servicesMgr.channels.get(position).channelID !=null){
+            	if(channelsVar==null){
+            		channelsVar = servicesMgr.channels.get(position).channelID;
+            	}else{
+            		channelsVar = channelsVar + ", "+ servicesMgr.channels.get(position).channelID;
+            	}
+            }
+            
+            Log.i("TAG", "Channels list [" + channelsVar + "]");
             tv.setText(servicesMgr.channels.get(position).title);
             tv.setOnClickListener(new OnClickListener() {
 				public void onClick(View v) {
@@ -87,21 +98,30 @@ public class Epg extends Activity implements ChannelsRetrievedCallback {
 
     }
 
-	public void onDownloadSuccess(ArrayList<Channels> result) {
-		
+	public void onChannelsDownloadedSuccess(ArrayList<Channels> result) {
 		if(result.size() > 0){
 			servicesMgr.updateShownChannels((ArrayList<Channels>) result);
 			channelAdapter.notifyDataSetChanged();
-			
+	        servicesMgr.refreshShownPrograms(); 
 		} else{
 //			hashText.setText(R.string.results_empty_title);
 		}
-		
 	}
 
-	public void onDownloadFailure(String message) {
+	public void onChannelsDownloadFailure(String message) {
 	}
 
-	public void onConnectionTimeOut() {
+	public void onChannelConnectionTimeOut() {
 	}
+
+	public void onProgrammesDownloadedSuccess(ArrayList<Channels> result) {
+		Log.i("TAG", "Programmes are all here " + result.size());
+	}
+
+	public void onProgrammesDownloadFailure(String message) {
+	}
+
+	public void onProgrammesConnectionTimeOut() {
+	}
+
 }
