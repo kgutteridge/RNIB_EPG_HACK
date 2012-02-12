@@ -60,9 +60,16 @@
     // Do any additional setup after loading the view from its nib.
 }
 
--(void)viewDidAppear:(BOOL)animated
+-(void)viewWillAppear:(BOOL)animated
 {
-    [super viewDidAppear:animated];
+    [super viewWillAppear:animated];
+    NSString *programDesc =  [self.programDetail objectForKey:@"shortDesc"];
+    textView.text = programDesc;
+    
+    NSString *programName = [self.programDetail objectForKey:@"title"];
+    [recordButton setTitle:[NSString stringWithFormat:@"%@",programName] forState:UIControlStateNormal];
+    [recordButton setAccessibilityLabel:[NSString stringWithFormat:@"%@",programName]];
+    
 }
 
 - (void)viewDidUnload
@@ -80,8 +87,12 @@
 
 
 #pragma mark -
-#pragma 
+#pragma mark UIActions
 
+-(IBAction)recordButtonAction:(id)sender
+{
+    
+}
 
 
 @end

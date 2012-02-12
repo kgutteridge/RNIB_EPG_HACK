@@ -332,9 +332,33 @@
     TVGuideViewController *viewController = [[TVGuideViewController alloc] init];
     NSDictionary *detail = [self.channelDetails objectAtIndex:indexPath.row];
 
+    id programs = [detail objectForKey:@"program"];
+    
+
+    //cell.textLabel.text = @"-";
+    if([programs count] > 0)
+    {
+        NSDictionary *nowDictionary = nil;
+        
+        if(![programs isKindOfClass:[NSDictionary class]] && ![programs isKindOfClass:NSClassFromString(@"JKDictionary")])
+        {
+            nowDictionary = [programs objectAtIndex:0];
+        }
+        else
+        {
+            nowDictionary = programs;
+        }
+        
+        if([nowDictionary isKindOfClass:NSClassFromString(@"JKDictionary")])
+        {
+            viewController.programDetail = nowDictionary;
+            [self.navigationController pushViewController:viewController animated:YES];
+        }
+    }
     
     
-    [self.navigationController pushViewController:viewController animated:YES];
+    
+  
     [viewController release];
     
 }
