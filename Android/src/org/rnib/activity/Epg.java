@@ -1,5 +1,7 @@
 package org.rnib.activity;
 
+import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import org.rnib.R;
@@ -28,6 +30,12 @@ public class Epg extends Activity implements ChannelsRetrievedCallback, Programe
     
 	private ChannelMgr channelServicesMgr = new ChannelMgr(this, this);
 
+	public static final String BUNDLE_PROG_DESC = "description";
+	public static final String BUNDLE_PROG_TITLE = "programmetitle";
+	public static final String BUNDLE_PROG_TIME = "time";
+	public static final String BUNDLE_PROG_CHANNELID = "channelid";
+	public static final String BUNDLE_PROG_CHANNEL = "channel";
+	
 	private ListView lv;
 
 	private ChannelAdapter channelAdapter;
@@ -53,7 +61,8 @@ public class Epg extends Activity implements ChannelsRetrievedCallback, Programe
     }
     
     private class ChannelAdapter extends BaseAdapter {
-    	private ChannelMgr mgr;
+
+		private ChannelMgr mgr;
     	private String channelsVar;
     	
         public ChannelAdapter(Context context, ChannelMgr mgr) {
@@ -73,7 +82,7 @@ public class Epg extends Activity implements ChannelsRetrievedCallback, Programe
             return position;
         }
 
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
             TextView tv;
             if (convertView == null) {
                 tv = (TextView) LayoutInflater.from(mContext).inflate(
@@ -91,15 +100,19 @@ public class Epg extends Activity implements ChannelsRetrievedCallback, Programe
 //            }
             
             if(mgr.channels.get(position).programmes == null){
-            	Log.i("TAG", "Channels list [" + channelsVar + "]");
             	tv.setText(channelServicesMgr.channels.get(position).title);
             }else{
-            	Log.i("TAG", "Channels list [" + channelsVar + "]");
             	tv.setText(channelServicesMgr.channels.get(position).title + ":" + channelServicesMgr.channels.get(position).programmes.get(0).title);
-            	
+            	Log.i("TAG", "This is the channel ID: " + channelServicesMgr.channels.get(position).channelID);
             	tv.setOnClickListener(new OnClickListener() {
             		public void onClick(View v) {
-            			startActivity(new Intent(Epg.this, ProgDetails.class));
+            			Intent programmeDetails = new Intent(Epg.this, ProgDetails.class);
+            			programmeDetails.putExtra(BUNDLE_PROG_CHANNEL, channelServicesMgr.channels.get(position).title);
+            			programmeDetails.putExtra(BUNDLE_PROG_CHANNELID, channelServicesMgr.channels.get(position).channelID);
+            			programmeDetails.putExtra(BUNDLE_PROG_TIME, channelServicesMgr.channels.get(position).programmes.get(0).start);
+            			programmeDetails.putExtra(BUNDLE_PROG_TITLE, channelServicesMgr.channels.get(position).programmes.get(0).title);
+            			programmeDetails.putExtra(BUNDLE_PROG_DESC, channelServicesMgr.channels.get(position).programmes.get(0).shortDesc);
+						startActivity(programmeDetails);
             		}
             	});
             }
@@ -128,7 +141,6 @@ public class Epg extends Activity implements ChannelsRetrievedCallback, Programe
 	}
 
 	public void onProgrammesDownloadedSuccess(ArrayList<org.rnib.model.progs.Channels> result) {
-		Log.i("TAG", "Programmes are all here " + result.size());
 		if(result.size() > 0){
 			channelServicesMgr.updateUIWithProgrammes((ArrayList<org.rnib.model.progs.Channels>) result);
 			channelAdapter.notifyDataSetChanged();
