@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import org.rnib.R;
 import org.rnib.coms.ChannelMgr;
 import org.rnib.coms.ChannelRetriever.ChannelsRetrievedCallback;
-import org.rnib.model.channels.Channels;
+import org.rnib.model.channels.Channel;
 
 import android.app.Activity;
 import android.content.Context;
@@ -21,7 +21,7 @@ public class ProgDetails extends Activity implements ChannelsRetrievedCallback {
 		setContentView(R.layout.act_programme_details);
 	}
 
-	public void onDownloadSuccess(ArrayList<Channels> result) {
+	public void onDownloadSuccess(ArrayList<Channel> result) {
 	}
 
 	public void onChannelsDownloadFailure(String message) {
@@ -30,7 +30,7 @@ public class ProgDetails extends Activity implements ChannelsRetrievedCallback {
 	public void onChannelConnectionTimeOut() {
 	}
 
-	public void onChannelsDownloadedSuccess(ArrayList<Channels> result) {
+	public void onChannelsDownloadedSuccess(ArrayList<Channel> result) {
 	}
 
 }

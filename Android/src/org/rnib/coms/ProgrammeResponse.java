@@ -2,8 +2,8 @@ package org.rnib.coms;
 
 import java.util.List;
 
-import org.rnib.model.channels.Channels;
+import org.rnib.model.channels.Channel;
 
 public class ProgrammeResponse {
-	public List <Channels> channels;
+	public List <org.rnib.model.progs.Channels> channels;
 }

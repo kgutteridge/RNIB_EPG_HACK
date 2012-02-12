@@ -19,6 +19,9 @@ public class Program {
 	@SerializedName("dur")
 	public String dur;
 	
+	@SerializedName("title")
+	public String title;
+	
 	@SerializedName("genreid")
 	public String genreid;
 	

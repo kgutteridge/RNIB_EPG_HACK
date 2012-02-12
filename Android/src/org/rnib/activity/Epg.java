@@ -6,7 +6,7 @@ import org.rnib.R;
 import org.rnib.coms.ChannelMgr;
 import org.rnib.coms.ChannelRetriever.ChannelsRetrievedCallback;
 import org.rnib.coms.ProgrammeRetriever.ProgramesRetrievedCallback;
-import org.rnib.model.channels.Channels;
+import org.rnib.model.channels.Channel;
 
 import android.app.Activity;
 import android.content.Context;
@@ -26,7 +26,7 @@ public class Epg extends Activity implements ChannelsRetrievedCallback, Programe
 
     private Context mContext;
     
-	private ChannelMgr servicesMgr = new ChannelMgr(this, this);
+	private ChannelMgr channelServicesMgr = new ChannelMgr(this, this);
 
 	private ListView lv;
 
@@ -42,9 +42,14 @@ public class Epg extends Activity implements ChannelsRetrievedCallback, Programe
     @Override
     protected void onResume() {
     	super.onResume();
-		channelAdapter = new ChannelAdapter(this, servicesMgr);
+		channelAdapter = new ChannelAdapter(this, channelServicesMgr);
 		lv.setAdapter(channelAdapter);
-        servicesMgr.refreshShownChannels(); 
+		
+		
+		//TODO: add a timestamp to refresh
+		if(channelServicesMgr.channels.size() <= 0){
+			channelServicesMgr.refreshShownChannels(); 
+		}
     }
     
     private class ChannelAdapter extends BaseAdapter {
@@ -57,7 +62,7 @@ public class Epg extends Activity implements ChannelsRetrievedCallback, Programe
         }
 
         public int getCount() {
-            return servicesMgr.channels.size();
+            return channelServicesMgr.channels.size();
         }
 
         public Object getItem(int position) {
@@ -77,32 +82,40 @@ public class Epg extends Activity implements ChannelsRetrievedCallback, Programe
                 tv = (TextView) convertView;
             }
 
-            if(servicesMgr.channels.get(position).channelID !=null){
-            	if(channelsVar==null){
-            		channelsVar = servicesMgr.channels.get(position).channelID;
-            	}else{
-            		channelsVar = channelsVar + ", "+ servicesMgr.channels.get(position).channelID;
-            	}
+//            if(channelServicesMgr.channels.get(position).channelID !=null){
+//            	if(channelsVar==null){
+//            		channelsVar = channelServicesMgr.channels.get(position).channelID;
+//            	}else{
+//            		channelsVar = channelsVar + ", "+ channelServicesMgr.channels.get(position).channelID;
+//            	}
+//            }
+            
+            if(mgr.channels.get(position).programmes == null){
+            	Log.i("TAG", "Channels list [" + channelsVar + "]");
+            	tv.setText(channelServicesMgr.channels.get(position).title);
+            }else{
+            	Log.i("TAG", "Channels list [" + channelsVar + "]");
+            	tv.setText(channelServicesMgr.channels.get(position).title + ":" + channelServicesMgr.channels.get(position).programmes.get(0).title);
+            	
+            	tv.setOnClickListener(new OnClickListener() {
+            		public void onClick(View v) {
+            			startActivity(new Intent(Epg.this, ProgDetails.class));
+            		}
+            	});
             }
             
-            Log.i("TAG", "Channels list [" + channelsVar + "]");
-            tv.setText(servicesMgr.channels.get(position).title);
-            tv.setOnClickListener(new OnClickListener() {
-				public void onClick(View v) {
-					startActivity(new Intent(Epg.this, ProgDetails.class));
-				}
-			});
+            
             
             return tv;
         }
 
     }
 
-	public void onChannelsDownloadedSuccess(ArrayList<Channels> result) {
+	public void onChannelsDownloadedSuccess(ArrayList<org.rnib.model.channels.Channel> result) {
 		if(result.size() > 0){
-			servicesMgr.updateShownChannels((ArrayList<Channels>) result);
+			channelServicesMgr.updateShownChannels((ArrayList<org.rnib.model.channels.Channel>) result);
 			channelAdapter.notifyDataSetChanged();
-	        servicesMgr.refreshShownPrograms(); 
+	        channelServicesMgr.refreshShownPrograms(); 
 		} else{
 //			hashText.setText(R.string.results_empty_title);
 		}
@@ -114,8 +127,12 @@ public class Epg extends Activity implements ChannelsRetrievedCallback, Programe
 	public void onChannelConnectionTimeOut() {
 	}
 
-	public void onProgrammesDownloadedSuccess(ArrayList<Channels> result) {
+	public void onProgrammesDownloadedSuccess(ArrayList<org.rnib.model.progs.Channels> result) {
 		Log.i("TAG", "Programmes are all here " + result.size());
+		if(result.size() > 0){
+			channelServicesMgr.updateUIWithProgrammes((ArrayList<org.rnib.model.progs.Channels>) result);
+			channelAdapter.notifyDataSetChanged();
+		}
 	}
 
 	public void onProgrammesDownloadFailure(String message) {

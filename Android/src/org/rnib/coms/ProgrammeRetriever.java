@@ -13,7 +13,7 @@ import java.util.Iterator;
 
 import org.rnib.R;
 import org.rnib.app.SkyEPG;
-import org.rnib.model.channels.Channels;
+import org.rnib.model.channels.Channel;
 
 import android.util.Log;
 
@@ -28,7 +28,7 @@ public class ProgrammeRetriever {
 	String PROGS_API = "tvlistings.json";
 	
 	public interface ProgramesRetrievedCallback {
-		public void onProgrammesDownloadedSuccess(ArrayList<Channels> result);
+		public void onProgrammesDownloadedSuccess(ArrayList<org.rnib.model.progs.Channels> result);
 		public void onProgrammesDownloadFailure(String message);
 		public void onProgrammesConnectionTimeOut();
 	}
@@ -119,10 +119,10 @@ public class ProgrammeRetriever {
 		String jsonString = writer.toString();
 		
 		ProgrammeResponse response = new Gson().fromJson(jsonString, ProgrammeResponse.class);  
-		ArrayList<Channels> lineupsRetrieved = new ArrayList<Channels>();
-		Iterator<Channels> i = response.channels.iterator();
+		ArrayList<org.rnib.model.progs.Channels> lineupsRetrieved = new ArrayList<org.rnib.model.progs.Channels>();
+		Iterator<org.rnib.model.progs.Channels> i = response.channels.iterator();
 		while (i.hasNext()) {
-			Channels channel = (Channels) i.next();
+			org.rnib.model.progs.Channels channel = (org.rnib.model.progs.Channels) i.next();
 			lineupsRetrieved.add(channel);
 		}
 	        

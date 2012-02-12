@@ -4,9 +4,13 @@ import java.util.List;
 
 import com.google.gson.annotations.SerializedName;
 
+
+/*
+ *  Channels retireved for the purpose of documenting Programmesw
+ */
 public class Channels {
 	@SerializedName("title")
-	public String channelNo;
+	public String title;
 	
 	@SerializedName("channeltype")
 	public String channelType;
@@ -17,5 +21,6 @@ public class Channels {
 	@SerializedName("genre")
 	public String genre;
 	
+	@SerializedName("program")
 	public List <Program> programmes;
 }

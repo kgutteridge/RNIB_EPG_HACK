@@ -14,7 +14,7 @@ import java.util.Iterator;
 
 import org.rnib.R;
 import org.rnib.app.SkyEPG;
-import org.rnib.model.channels.Channels;
+import org.rnib.model.channels.Channel;
 
 import android.util.Log;
 
@@ -46,10 +46,10 @@ public class ChannelRetriever {
 		public void onSuccess(int resultCode, byte[] array) throws IOException {
 			
 			ChannelResponse response = new Gson().fromJson(new String(array), ChannelResponse.class);  
-			ArrayList<Channels> channelsRetrieved = new ArrayList<Channels>();
-			Iterator<Channels> i = response.channels.iterator();
+			ArrayList<Channel> channelsRetrieved = new ArrayList<Channel>();
+			Iterator<Channel> i = response.channels.iterator();
 			while (i.hasNext()) {
-				Channels res = (Channels) i.next();
+				Channel res = (Channel) i.next();
 				Log.i("TAG", "channel " + res.title);
 				channelsRetrieved.add(res);
 			}
@@ -130,10 +130,10 @@ public class ChannelRetriever {
 		String jsonString = writer.toString();
 		
 		ChannelResponse response = new Gson().fromJson(jsonString, ChannelResponse.class);  
-		ArrayList<Channels> channelsRetrieved = new ArrayList<Channels>();
-			Iterator<Channels> i = response.channels.iterator();
+		ArrayList<Channel> channelsRetrieved = new ArrayList<Channel>();
+			Iterator<Channel> i = response.channels.iterator();
 			while (i.hasNext()) {
-				Channels channel = (Channels) i.next();
+				Channel channel = (Channel) i.next();
 	            if(channelsVar==null){
 	            		channelsVar = channel.channelID;
             	}else{
@@ -154,7 +154,7 @@ public class ChannelRetriever {
 	}
 	
 	public interface ChannelsRetrievedCallback {
-		public void onChannelsDownloadedSuccess(ArrayList<Channels> result);
+		public void onChannelsDownloadedSuccess(ArrayList<Channel> result);
 		public void onChannelsDownloadFailure(String message);
 		public void onChannelConnectionTimeOut();
 	}
