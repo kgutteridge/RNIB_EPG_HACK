@@ -15,9 +15,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnKeyListener;
+import android.view.inputmethod.EditorInfo;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.LinearLayout;
@@ -54,7 +57,6 @@ public class Epg extends Activity implements ChannelsRetrievedCallback, Programe
 		channelAdapter = new ChannelAdapter(this, channelServicesMgr);
 		lv.setAdapter(channelAdapter);
 		
-		
 		//TODO: add a timestamp to refresh
 		if(channelServicesMgr.channels.size() <= 0){
 			channelServicesMgr.refreshShownChannels(); 
@@ -82,7 +84,7 @@ public class Epg extends Activity implements ChannelsRetrievedCallback, Programe
         public long getItemId(int position) {
             return position;
         }
-
+        
         public View getView(final int position, View convertView, ViewGroup parent) {
         	LinearLayout li_channel;
         	TextView title;
@@ -112,25 +114,36 @@ public class Epg extends Activity implements ChannelsRetrievedCallback, Programe
             	title.setContentDescription(channelServicesMgr.channels.get(position).programmes.get(0).title);
             	channel.setText(channelServicesMgr.channels.get(position).title);
             	channel.setContentDescription(channelServicesMgr.channels.get(position).title);
+            	li_channel.setOnKeyListener(new OnKeyListener() {
+            	      public boolean onKey(View v, int keyCode, KeyEvent event) {
+            	          if (event.getAction() == KeyEvent.ACTION_DOWN ){
+            	        	  launchProgDetails(position);
+            	          }
+            	          return true;
+            	        }
+            	      });	
+            	
             	li_channel.setOnClickListener(new OnClickListener() {
             		public void onClick(View v) {
-            			Intent programmeDetails = new Intent(Epg.this, ProgDetails.class);
-            			programmeDetails.putExtra(BUNDLE_PROG_CHANNEL, channelServicesMgr.channels.get(position).title);
-            			programmeDetails.putExtra(BUNDLE_PROG_CHANNELID, channelServicesMgr.channels.get(position).channelID);
-            			programmeDetails.putExtra(BUNDLE_PROG_TIME, channelServicesMgr.channels.get(position).programmes.get(0).start);
-            			programmeDetails.putExtra(BUNDLE_PROG_TITLE, channelServicesMgr.channels.get(position).programmes.get(0).title);
-            			programmeDetails.putExtra(BUNDLE_PROG_DESC, channelServicesMgr.channels.get(position).programmes.get(0).shortDesc);
-						startActivity(programmeDetails);
+            			launchProgDetails(position);
             		}
             	});
             }
-            
-            
             
             return li_channel;
         }
 
     }
+    
+	protected void launchProgDetails(final int position) {
+		Intent programmeDetails = new Intent(Epg.this, ProgDetails.class);
+		programmeDetails.putExtra(BUNDLE_PROG_CHANNEL, channelServicesMgr.channels.get(position).title);
+		programmeDetails.putExtra(BUNDLE_PROG_CHANNELID, channelServicesMgr.channels.get(position).channelID);
+		programmeDetails.putExtra(BUNDLE_PROG_TIME, channelServicesMgr.channels.get(position).programmes.get(0).start);
+		programmeDetails.putExtra(BUNDLE_PROG_TITLE, channelServicesMgr.channels.get(position).programmes.get(0).title);
+		programmeDetails.putExtra(BUNDLE_PROG_DESC, channelServicesMgr.channels.get(position).programmes.get(0).shortDesc);
+		startActivity(programmeDetails);
+	}
 
 	public void onChannelsDownloadedSuccess(ArrayList<org.rnib.model.channels.Channel> result) {
 		if(result.size() > 0){
