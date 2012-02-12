@@ -1,20 +1,15 @@
 package uk.co.kgutteridge.rnibhack.EPGModel;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import uk.co.kgutteridge.app.EPGApp;
-import uk.co.kgutteridge.rnibhack.R;
 import android.app.Application;
 import android.content.Intent;
 import android.net.Uri;
-import android.text.TextUtils;
 import android.util.Log;
 
 import com.akshay.http.service.HttpIntentService;
@@ -42,12 +37,12 @@ public class ChannelRetriever {
 		this.callback = callback;
 	}
 
-	private final ResultHandler textHandler = new ResultHandler() {
+	private final ResultHandler channelResponseHandler = new ResultHandler() {
 		@Override
 		public void onSuccess(int resultCode, byte[] array) throws IOException {
-			
+			Log.i("TAG", "result came back successful");
 			ChannelResponse response = new Gson().fromJson(new String(array), ChannelResponse.class);  
-//		        Log.i("TAG", "channels " + response.channels.size());
+			Log.i("TAG", "channels " + response.channels.size());
 
 			ArrayList<Channels> channelsRetrieved = new ArrayList<Channels>();
 				Iterator<Channels> i = response.channels.iterator();
@@ -63,14 +58,18 @@ public class ChannelRetriever {
 
 		@Override
 		public void onError(int resultCode, byte[] result) {
+			Log.i("TAG", "result came back erroring");
 			switch (resultCode) {
 			case HttpStatusCodes.GATEWAY_TIMEOUT:
 				callback.onConnectionTimeOut();
+				Log.i("TAG", "timeout");
 				break;
 			case HttpStatusCodes.FORBIDDEN:
+				Log.i("TAG", "forbidden");
 				callback.onDownloadFailure("Cannot find any matches!");
 				break;
 			default:
+				Log.i("TAG", "download failure");
 				callback.onDownloadFailure(new String(result));
 				break;
 			}
@@ -78,6 +77,7 @@ public class ChannelRetriever {
 
 		@Override
 		public void onFailure(int resultCode, Exception e) {
+			Log.i("TAG", "result came failing");
 			e.printStackTrace();
 			callback.onDownloadFailure("Failed to retrieve");
 		}
@@ -89,12 +89,22 @@ public class ChannelRetriever {
 	}
 
 	private void retrieveChannelStream() {
+		Log.i("TAG", "retrieving channels from retriever");
 		Intent intent = new ServiceIntentBuilder(
 				(Application) EPGApp.getContext())
 				.setHttpType(HttpIntentService.SERVICE_TYPE_GET)
 				.setData(Uri.withAppendedPath(Uri.parse(BASE_URL), CHANNELS_API))
-				.setResultReceiver(textHandler).build();
+				.withParam(Params.QUERY, sanitizeString(""))
+				.setResultReceiver(channelResponseHandler).build();
 		EPGApp.getContext().startService(intent);
+	}
+	
+	private String sanitizeString(String s) {
+		try {
+			return URLEncoder.encode(s, UTF_8);
+		} catch (UnsupportedEncodingException e) {
+			return s;
+		}
 	}
 	
 	public interface RetrieverCallback {

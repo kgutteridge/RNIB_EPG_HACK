@@ -1,19 +1,7 @@
 package uk.co.kgutteridge.rnibhack;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
 import java.util.ArrayList;
-import java.util.Iterator;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.HttpStatus;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
-
-import uk.co.kgutteridge.rnibhack.EPGModel.ChannelResponse;
 import uk.co.kgutteridge.rnibhack.EPGModel.ChannelRetriever.RetrieverCallback;
 import uk.co.kgutteridge.rnibhack.EPGModel.Channels;
 import uk.co.kgutteridge.rnibhack.EPGModel.ServicesMgr;
@@ -27,8 +15,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-
-import com.google.gson.Gson;
 
 
 public class Epg extends Activity implements RetrieverCallback {
@@ -54,13 +40,9 @@ public class Epg extends Activity implements RetrieverCallback {
             "----------"
     };
 
-	private ChannelResponse response;
-	
 	private ServicesMgr servicesMgr = new ServicesMgr(this);
 
 	private ListView lv;
-
-	private ArrayList<Channels> channelsRetrieved;
 
 	private ChannelAdapter channelAdapter;
 
@@ -76,9 +58,6 @@ public class Epg extends Activity implements RetrieverCallback {
     protected void onResume() {
     	super.onResume();
 		channelAdapter = new ChannelAdapter(this, servicesMgr);
-//        Log.i("TAG", "channels " + response.channels.size());
-		
-//        lv.setAdapter(channelAdapter);
     }
     
     private class ChannelAdapter extends BaseAdapter {
@@ -91,10 +70,6 @@ public class Epg extends Activity implements RetrieverCallback {
         }
 
         public int getCount() {
-        	Log.i("TAG", "response " +  response);
-//        	Log.i("TAG", "response.channelsList " + response.channelsList);
-//        	Log.i("TAG", "response.channelsList.size" + response.channelsList.size());
-        	
             return servicesMgr.channelsRetrieved.size() - 1;
         }
 
@@ -120,8 +95,7 @@ public class Epg extends Activity implements RetrieverCallback {
     }
 
 	public void onDownloadSuccess(ArrayList<Channels> result) {
-		
-		Log.i("TAG", "The result is not empty " + result.size());
+		Log.i("TAG", "result size= " + result.size());
 		
 		if(result.size() > 0){
 			servicesMgr.updateResults((ArrayList<Channels>) result);

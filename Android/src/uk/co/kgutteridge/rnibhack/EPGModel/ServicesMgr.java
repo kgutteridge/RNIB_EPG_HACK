@@ -6,12 +6,12 @@ import uk.co.kgutteridge.rnibhack.EPGModel.ChannelRetriever.RetrieverCallback;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 
 public class ServicesMgr {
 
 	private final ChannelRetriever channelretriver;
 	public ArrayList<Channels> channelsRetrieved = new ArrayList<Channels>();
-	private String latestChannelChoice = "bbc1";
 	
 	private BroadcastReceiver channelReceiver = new BroadcastReceiver() {
 		@Override
@@ -25,6 +25,7 @@ public class ServicesMgr {
 	}
 	
 	public void update() {
+		Log.i("TAG", "retrieving channels from manager");
 		channelretriver.retrieveChannels();
 	}
 	
