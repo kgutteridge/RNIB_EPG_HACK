@@ -7,9 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+ 
+@interface FirstViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
-@interface FirstViewController : UIViewController
+@property (nonatomic, retain) NSArray *channelIDs, *channelDetails;
 
-@property (nonatomic, retain) NSDictionary *channelIDs;
+@property (nonatomic, retain) IBOutlet UITableView *tableView; 
 
 @end
