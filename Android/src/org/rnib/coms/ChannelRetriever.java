@@ -14,7 +14,7 @@ import java.util.Iterator;
 
 import org.rnib.R;
 import org.rnib.app.SkyEPG;
-import org.rnib.model.channels.Channels;
+import org.rnib.model.channels.Channel;
 
 import android.util.Log;
 
@@ -46,16 +46,15 @@ public class ChannelRetriever {
 		public void onSuccess(int resultCode, byte[] array) throws IOException {
 			
 			ChannelResponse response = new Gson().fromJson(new String(array), ChannelResponse.class);  
-			ArrayList<Channels> channelsRetrieved = new ArrayList<Channels>();
-				Iterator<Channels> i = response.channels.iterator();
-				while (i.hasNext()) {
-					Channels res = (Channels) i.next();
-					Log.i("TAG", "channel " + res.title);
-					channelsRetrieved.add(res);
-				}
-		        
-			
-			callback.onDownloadSuccess(channelsRetrieved);
+			ArrayList<Channel> channelsRetrieved = new ArrayList<Channel>();
+			Iterator<Channel> i = response.channels.iterator();
+			while (i.hasNext()) {
+				Channel res = (Channel) i.next();
+				Log.i("TAG", "channel " + res.title);
+				channelsRetrieved.add(res);
+			}
+		       
+			callback.onChannelsDownloadedSuccess(channelsRetrieved);
 		}
 
 		@Override
@@ -63,16 +62,16 @@ public class ChannelRetriever {
 			Log.i("TAG", "result came back erroring");
 			switch (resultCode) {
 			case HttpStatusCodes.GATEWAY_TIMEOUT:
-				callback.onConnectionTimeOut();
+				callback.onChannelConnectionTimeOut();
 				Log.i("TAG", "timeout");
 				break;
 			case HttpStatusCodes.FORBIDDEN:
 				Log.i("TAG", "forbidden");
-				callback.onDownloadFailure("Cannot find any matches!");
+				callback.onChannelsDownloadFailure("Cannot find any matches!");
 				break;
 			default:
 				Log.i("TAG", "download failure");
-				callback.onDownloadFailure(new String(result));
+				callback.onChannelsDownloadFailure(new String(result));
 				break;
 			}
 		}
@@ -80,7 +79,7 @@ public class ChannelRetriever {
 		@Override
 		public void onFailure(int resultCode, Exception e) {
 			e.printStackTrace();
-			callback.onDownloadFailure("Failed to retrieve");
+			callback.onChannelsDownloadFailure("Failed to retrieve");
 		}
 
 	};
@@ -89,6 +88,8 @@ public class ChannelRetriever {
 		retrieveChannelStream();
 	}
 
+	private String channelsVar;
+	
 	private void retrieveChannelStream() {
 		Log.i("TAG", "retrieving channels from retriever");
 //		Intent intent = new ServiceIntentBuilder(
@@ -129,15 +130,19 @@ public class ChannelRetriever {
 		String jsonString = writer.toString();
 		
 		ChannelResponse response = new Gson().fromJson(jsonString, ChannelResponse.class);  
-		ArrayList<Channels> channelsRetrieved = new ArrayList<Channels>();
-			Iterator<Channels> i = response.channels.iterator();
+		ArrayList<Channel> channelsRetrieved = new ArrayList<Channel>();
+			Iterator<Channel> i = response.channels.iterator();
 			while (i.hasNext()) {
-				Channels res = (Channels) i.next();
-				channelsRetrieved.add(res);
+				Channel channel = (Channel) i.next();
+	            if(channelsVar==null){
+	            		channelsVar = channel.channelID;
+            	}else{
+            		channelsVar = channel.channelID + ", "+ channel.channelID;
+            	}
+				channelsRetrieved.add(channel);
 			}
 	        
-		callback.onDownloadSuccess(channelsRetrieved);
-		
+		callback.onChannelsDownloadedSuccess(channelsRetrieved);
 	}
 	
 	private String sanitizeString(String s) {
@@ -149,8 +154,8 @@ public class ChannelRetriever {
 	}
 	
 	public interface ChannelsRetrievedCallback {
-		public void onDownloadSuccess(ArrayList<Channels> result);
-		public void onDownloadFailure(String message);
-		public void onConnectionTimeOut();
+		public void onChannelsDownloadedSuccess(ArrayList<Channel> result);
+		public void onChannelsDownloadFailure(String message);
+		public void onChannelConnectionTimeOut();
 	}
 }

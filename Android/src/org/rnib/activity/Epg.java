@@ -5,28 +5,28 @@ import java.util.ArrayList;
 import org.rnib.R;
 import org.rnib.coms.ChannelMgr;
 import org.rnib.coms.ChannelRetriever.ChannelsRetrievedCallback;
-import org.rnib.model.channels.Channels;
+import org.rnib.coms.ProgrammeRetriever.ProgramesRetrievedCallback;
+import org.rnib.model.channels.Channel;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 
-public class Epg extends Activity implements ChannelsRetrievedCallback {
+public class Epg extends Activity implements ChannelsRetrievedCallback, ProgramesRetrievedCallback {
 
     private Context mContext;
     
-	private ChannelMgr servicesMgr = new ChannelMgr(this);
+	private ChannelMgr channelServicesMgr = new ChannelMgr(this, this);
 
 	private ListView lv;
 
@@ -42,13 +42,19 @@ public class Epg extends Activity implements ChannelsRetrievedCallback {
     @Override
     protected void onResume() {
     	super.onResume();
-		channelAdapter = new ChannelAdapter(this, servicesMgr);
+		channelAdapter = new ChannelAdapter(this, channelServicesMgr);
 		lv.setAdapter(channelAdapter);
-        servicesMgr.refreshShownChannels(); 
+		
+		
+		//TODO: add a timestamp to refresh
+		if(channelServicesMgr.channels.size() <= 0){
+			channelServicesMgr.refreshShownChannels(); 
+		}
     }
     
     private class ChannelAdapter extends BaseAdapter {
     	private ChannelMgr mgr;
+    	private String channelsVar;
     	
         public ChannelAdapter(Context context, ChannelMgr mgr) {
         	this.mgr=mgr;
@@ -56,7 +62,7 @@ public class Epg extends Activity implements ChannelsRetrievedCallback {
         }
 
         public int getCount() {
-            return servicesMgr.channels.size();
+            return channelServicesMgr.channels.size();
         }
 
         public Object getItem(int position) {
@@ -75,33 +81,64 @@ public class Epg extends Activity implements ChannelsRetrievedCallback {
             } else {
                 tv = (TextView) convertView;
             }
-            tv.setText(servicesMgr.channels.get(position).title);
-            tv.setOnClickListener(new OnClickListener() {
-				public void onClick(View v) {
-					startActivity(new Intent(Epg.this, ProgDetails.class));
-				}
-			});
+
+//            if(channelServicesMgr.channels.get(position).channelID !=null){
+//            	if(channelsVar==null){
+//            		channelsVar = channelServicesMgr.channels.get(position).channelID;
+//            	}else{
+//            		channelsVar = channelsVar + ", "+ channelServicesMgr.channels.get(position).channelID;
+//            	}
+//            }
+            
+            if(mgr.channels.get(position).programmes == null){
+            	Log.i("TAG", "Channels list [" + channelsVar + "]");
+            	tv.setText(channelServicesMgr.channels.get(position).title);
+            }else{
+            	Log.i("TAG", "Channels list [" + channelsVar + "]");
+            	tv.setText(channelServicesMgr.channels.get(position).title + ":" + channelServicesMgr.channels.get(position).programmes.get(0).title);
+            	
+            	tv.setOnClickListener(new OnClickListener() {
+            		public void onClick(View v) {
+            			startActivity(new Intent(Epg.this, ProgDetails.class));
+            		}
+            	});
+            }
+            
+            
             
             return tv;
         }
 
     }
 
-	public void onDownloadSuccess(ArrayList<Channels> result) {
-		
+	public void onChannelsDownloadedSuccess(ArrayList<org.rnib.model.channels.Channel> result) {
 		if(result.size() > 0){
-			servicesMgr.updateShownChannels((ArrayList<Channels>) result);
+			channelServicesMgr.updateShownChannels((ArrayList<org.rnib.model.channels.Channel>) result);
 			channelAdapter.notifyDataSetChanged();
-			
+	        channelServicesMgr.refreshShownPrograms(); 
 		} else{
 //			hashText.setText(R.string.results_empty_title);
 		}
-		
 	}
 
-	public void onDownloadFailure(String message) {
+	public void onChannelsDownloadFailure(String message) {
 	}
 
-	public void onConnectionTimeOut() {
+	public void onChannelConnectionTimeOut() {
 	}
+
+	public void onProgrammesDownloadedSuccess(ArrayList<org.rnib.model.progs.Channels> result) {
+		Log.i("TAG", "Programmes are all here " + result.size());
+		if(result.size() > 0){
+			channelServicesMgr.updateUIWithProgrammes((ArrayList<org.rnib.model.progs.Channels>) result);
+			channelAdapter.notifyDataSetChanged();
+		}
+	}
+
+	public void onProgrammesDownloadFailure(String message) {
+	}
+
+	public void onProgrammesConnectionTimeOut() {
+	}
+
 }

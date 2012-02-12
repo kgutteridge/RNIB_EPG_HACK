@@ -2,7 +2,10 @@ package org.rnib.model.channels;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Channels
+/*
+ * Channels unattached to programmes
+ */
+public class Channel
 {
 	@SerializedName("channelno")
 	public String channelNo;

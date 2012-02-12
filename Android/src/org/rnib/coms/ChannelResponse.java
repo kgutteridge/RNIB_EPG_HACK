@@ -2,7 +2,7 @@ package org.rnib.coms;
 
 import java.util.List;
 
-import org.rnib.model.channels.Channels;
+import org.rnib.model.channels.Channel;
 import org.rnib.model.channels.Epggenre;
 import org.rnib.model.channels.Filters;
 import org.rnib.model.channels.Genre;
@@ -14,7 +14,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class ChannelResponse
 {
-	public List <Channels> channels;
+	public List <Channel> channels;
 	public List <Epggenre> epgGenreList;
 	public List <Filters> filterList;
 	public List <Genre>	genreList;
