@@ -15,13 +15,19 @@ public final class R {
     }
     public static final class id {
         public static final int header =0x7f060000;
-        public static final int image=0x7f060003;
+        public static final int image=0x7f060008;
         public static final int list=0x7f060001;
-        public static final int text=0x7f060002;
+        public static final int prog_details_btn_record=0x7f060005;
+        public static final int prog_details_channel=0x7f060002;
+        public static final int prog_details_desc=0x7f060006;
+        public static final int prog_details_name=0x7f060003;
+        public static final int prog_details_time=0x7f060004;
+        public static final int text=0x7f060007;
     }
     public static final class layout {
         public static final int act_epg=0x7f030000;
-        public static final int main=0x7f030001;
+        public static final int act_programme_details=0x7f030001;
+        public static final int main=0x7f030002;
     }
     public static final class raw {
         public static final int init=0x7f040000;

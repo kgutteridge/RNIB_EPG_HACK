@@ -25,6 +25,17 @@
             </intent-filter>
         </activity>
         
+        <activity
+            android:label="@string/app_name"
+             android:name="uk.co.kgutteridge.app.ProgDetails" 
+            android:theme="@android:style/Theme.NoTitleBar">
+            <intent-filter >
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
         <service
             android:enabled="true"
             android:name="com.akshay.http.service.HttpIntentService" />
