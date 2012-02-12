@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"    
+    android:orientation="vertical" >
+
+   <LinearLayout
+        android:id="@+id/header	"
+        android:layout_width="fill_parent"
+        android:background="#df3232"
+    	android:layout_height="60dp"  />
+   <TextView
+        android:id="@+id/prog_details_channel"
+        android:layout_width="fill_parent"
+        android:text="BBC1"
+    	android:layout_height="60dp"  />
+   <TextView
+        android:id="@+id/prog_details_name"
+        android:layout_width="fill_parent"
+        android:text="Masterchef"
+    	android:layout_height="60dp"  />
+   <TextView
+        android:id="@+id/prog_details_time"
+        android:layout_width="fill_parent"
+        android:text="12:20"
+    	android:layout_height="60dp"  />
+   <Button
+        android:id="@+id/prog_details_btn_record"
+        android:layout_width="fill_parent"
+        android:text="Record"
+    	android:layout_height="60dp"  />
+   <TextView
+        android:id="@+id/prog_details_desc"
+        android:layout_width="fill_parent"
+        android:text="blah blah  blah blahl sbssfois oih"
+    	android:layout_height="60dp"  />
+    
+
+
+</LinearLayout>

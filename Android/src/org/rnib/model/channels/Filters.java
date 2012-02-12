@@ -1,4 +1,4 @@
-package uk.co.kgutteridge.rnibhack.EPGModel;
+package org.rnib.model.channels;
 
 import com.google.gson.annotations.SerializedName;
 

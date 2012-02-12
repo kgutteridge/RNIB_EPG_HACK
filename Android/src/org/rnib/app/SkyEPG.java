@@ -1,11 +1,11 @@
-package uk.co.kgutteridge.app;
+package org.rnib.app;
 
 import android.app.Application;
 import android.content.Context;
 
-public class EPGApp extends Application {
+public class SkyEPG extends Application {
 	
-    private static EPGApp instance;
+    private static SkyEPG instance;
 
 	@Override
 	public void onCreate() {
@@ -16,5 +16,6 @@ public class EPGApp extends Application {
 	public static Context getContext() {
         return instance.getApplicationContext();
     }
+	
 }
 
