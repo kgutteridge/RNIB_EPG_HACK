@@ -373,7 +373,8 @@ static void AFReachabilityCallback(SCNetworkReachabilityRef __unused target, SCN
         }
     }
     
-    if (!operation) {
+    if (!operation) 
+    {
         operation = [[[AFHTTPRequestOperation alloc] initWithRequest:urlRequest] autorelease];
     }
     

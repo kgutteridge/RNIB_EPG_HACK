@@ -20,4 +20,10 @@
 -(void)readUserPrefs;
 -(void)forgetUser;
 
+-(void)doRegistrationWithUsername:(NSString *)username andPassword:(NSString *)password;
+
+
+//http://www.sky.com/tvlistings-proxy/TVListingsProxy/remoteRecord.json?channelId=%(channel)d&eventId=%(event)d&siteId=1
+-(void)recordShow:(NSString *)eventID onChannel:(NSString *)channel;
+
 @end
