@@ -7,6 +7,7 @@
 //
 
 #import "User.h"
+#import "AFNetworking.h"
 
 @implementation User
 
@@ -32,11 +33,69 @@ static User *sharedUser = nil;
 {
 	NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
 	
-	NSLog(@"Reading user prefs %@",[prefs valueForKey:PREF_TOKEN]);
-
 	self.token = [prefs valueForKey:PREF_TOKEN];
 	
 }
+
+
+-(void)doRegistrationWithUsername:(NSString *)uname andPassword:(NSString *)pass
+{
+    
+    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
+    
+    NSURL *url = [NSURL URLWithString:@"https://skyid.sky.com/"];
+    AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
+    
+
+    [client postPath:@"signin" parameters:[NSDictionary dictionaryWithObjectsAndKeys:uname, @"username", pass, @"password", nil] 
+             success:^(AFHTTPRequestOperation *operation, id responseObject) 
+             {
+                 NSString *received_txt = [[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding] autorelease];   
+                 NSLog(@"Stuff %@",received_txt);
+                 NSLog(@"Request Headers %@",operation.response.allHeaderFields);                 
+                 NSArray *cookieArray =[NSHTTPCookie cookiesWithResponseHeaderFields:operation.response.allHeaderFields forURL:[NSURL URLWithString:@"https://skyid.sky.com/signin"]];
+                 
+                 for (NSHTTPCookie* cookie in cookieArray)
+                 {
+                      NSLog(@"nName: %@nValue: %@nExpires: %@", [cookie name], [cookie value], [cookie expiresDate]);
+                 }
+                    
+             } 
+             failure:^(AFHTTPRequestOperation *operation, NSError *error) 
+             {
+                 NSLog(@"Error %@", error);
+             }];
+    [client release]; 
+
+}
+
+
+//http://www.sky.com/tvlistings-proxy/TVListingsProxy/remoteRecord.json?channelId=%(channel)d&eventId=%(event)d&siteId=1
+-(void)recordShow:(NSString *)eventID onChannel:(NSString *)channel
+{
+    [[NSHTTPCookieStorage sharedHTTPCookieStorage] setCookieAcceptPolicy:NSHTTPCookieAcceptPolicyAlways];
+    
+    NSURL *url = [NSURL URLWithString:@"http://www.sky.com/"];
+    AFHTTPClient *client = [[AFHTTPClient alloc] initWithBaseURL:url];
+    
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:channel, @"channelId", eventID, @"eventId", @"1",@"siteId", nil];
+    
+    [client getPath:@"tvlistings-proxy/TVListingsProxy/remoteRecord.json" parameters: params
+             success:^(AFHTTPRequestOperation *operation, id responseObject) 
+     {
+       
+         NSString *received_txt = [[[NSString alloc] initWithData:responseObject encoding:NSUTF8StringEncoding] autorelease];   
+         NSLog(@"Record show %@",received_txt);
+    
+     } 
+             failure:^(AFHTTPRequestOperation *operation, NSError *error) 
+     {
+            NSLog(@"Error %@", error);
+     }];
+    [client release]; 
+    
+}
+
 
 
 

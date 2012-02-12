@@ -8,6 +8,8 @@
 
 #import "TVGuideViewController.h"
 
+#import "User.h"
+
 @interface TVGuideViewController()
 
 -(void)releaseOutlets;
@@ -68,7 +70,7 @@
     
     NSString *programName = [self.programDetail objectForKey:@"title"];
     [recordButton setTitle:[NSString stringWithFormat:@"%@",programName] forState:UIControlStateNormal];
-    [recordButton setAccessibilityLabel:[NSString stringWithFormat:@"%@",programName]];
+    [recordButton setAccessibilityLabel:[NSString stringWithFormat:@"Record %@",programName]];
     
 }
 
@@ -91,7 +93,11 @@
 
 -(IBAction)recordButtonAction:(id)sender
 {
+    User *user = [User sharedUser];
     
+    [user doRegistrationWithUsername:@"aUsername" andPassword:@"aPassword"];
+    
+    [user recordShow:[self.programDetail objectForKey:@"eventid"] onChannel:[self.programDetail objectForKey:@"channelid"]];
 }
 
 
