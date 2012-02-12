@@ -8,8 +8,6 @@
 
 #import "FirstViewController.h"
 
-#import "AFNetworking.h"
-
 @implementation FirstViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -51,13 +49,6 @@
     
     NSURL *url = [NSURL URLWithString:@"http://epgservices.sky.com/tvlistings-proxy/TVListingsProxy/init.json"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    
-    
-    
-    
-    AFJS
-    
-    [operation start];
 
     
     
