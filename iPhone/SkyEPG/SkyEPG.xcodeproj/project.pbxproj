@@ -1,0 +1,394 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		FD4F060714E7271200A3B8FF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD4F060614E7271200A3B8FF /* UIKit.framework */; };
+		FD4F060914E7271200A3B8FF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD4F060814E7271200A3B8FF /* Foundation.framework */; };
+		FD4F060B14E7271200A3B8FF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD4F060A14E7271200A3B8FF /* CoreGraphics.framework */; };
+		FD4F061114E7271200A3B8FF /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = FD4F060F14E7271200A3B8FF /* InfoPlist.strings */; };
+		FD4F061314E7271200A3B8FF /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FD4F061214E7271200A3B8FF /* main.m */; };
+		FD4F061714E7271200A3B8FF /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FD4F061614E7271200A3B8FF /* AppDelegate.m */; };
+		FD4F061A14E7271200A3B8FF /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD4F061914E7271200A3B8FF /* FirstViewController.m */; };
+		FD4F061C14E7271200A3B8FF /* first.png in Resources */ = {isa = PBXBuildFile; fileRef = FD4F061B14E7271200A3B8FF /* first.png */; };
+		FD4F061E14E7271200A3B8FF /* first@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FD4F061D14E7271200A3B8FF /* first@2x.png */; };
+		FD4F062114E7271200A3B8FF /* SecondViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD4F062014E7271200A3B8FF /* SecondViewController.m */; };
+		FD4F062314E7271200A3B8FF /* second.png in Resources */ = {isa = PBXBuildFile; fileRef = FD4F062214E7271200A3B8FF /* second.png */; };
+		FD4F062514E7271200A3B8FF /* second@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FD4F062414E7271200A3B8FF /* second@2x.png */; };
+		FD4F062814E7271200A3B8FF /* FirstViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD4F062614E7271200A3B8FF /* FirstViewController.xib */; };
+		FD4F062B14E7271200A3B8FF /* SecondViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD4F062914E7271200A3B8FF /* SecondViewController.xib */; };
+		FD4F064C14E727A500A3B8FF /* CHANGELOG.md in Resources */ = {isa = PBXBuildFile; fileRef = FD4F064814E727A500A3B8FF /* CHANGELOG.md */; };
+		FD4F064D14E727A500A3B8FF /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = FD4F064A14E727A500A3B8FF /* JSONKit.m */; };
+		FD4F064E14E727A500A3B8FF /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = FD4F064B14E727A500A3B8FF /* README.md */; };
+		FD4F065514E7281300A3B8FF /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD4F065314E7281300A3B8FF /* LoginViewController.m */; };
+		FD4F065614E7281300A3B8FF /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD4F065414E7281300A3B8FF /* LoginViewController.xib */; };
+		FD4F065A14E7288700A3B8FF /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = FD4F065914E7288700A3B8FF /* User.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		FD4F060214E7271200A3B8FF /* SkyEPG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkyEPG.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FD4F060614E7271200A3B8FF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		FD4F060814E7271200A3B8FF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		FD4F060A14E7271200A3B8FF /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		FD4F060E14E7271200A3B8FF /* SkyEPG-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SkyEPG-Info.plist"; sourceTree = "<group>"; };
+		FD4F061014E7271200A3B8FF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		FD4F061214E7271200A3B8FF /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		FD4F061414E7271200A3B8FF /* SkyEPG-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SkyEPG-Prefix.pch"; sourceTree = "<group>"; };
+		FD4F061514E7271200A3B8FF /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		FD4F061614E7271200A3B8FF /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		FD4F061814E7271200A3B8FF /* FirstViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
+		FD4F061914E7271200A3B8FF /* FirstViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
+		FD4F061B14E7271200A3B8FF /* first.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first.png; sourceTree = "<group>"; };
+		FD4F061D14E7271200A3B8FF /* first@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "first@2x.png"; sourceTree = "<group>"; };
+		FD4F061F14E7271200A3B8FF /* SecondViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SecondViewController.h; sourceTree = "<group>"; };
+		FD4F062014E7271200A3B8FF /* SecondViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SecondViewController.m; sourceTree = "<group>"; };
+		FD4F062214E7271200A3B8FF /* second.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = second.png; sourceTree = "<group>"; };
+		FD4F062414E7271200A3B8FF /* second@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "second@2x.png"; sourceTree = "<group>"; };
+		FD4F062714E7271200A3B8FF /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/FirstViewController.xib; sourceTree = "<group>"; };
+		FD4F062A14E7271200A3B8FF /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/SecondViewController.xib; sourceTree = "<group>"; };
+		FD4F064814E727A500A3B8FF /* CHANGELOG.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = CHANGELOG.md; sourceTree = "<group>"; };
+		FD4F064914E727A500A3B8FF /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
+		FD4F064A14E727A500A3B8FF /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
+		FD4F064B14E727A500A3B8FF /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		FD4F065214E7281300A3B8FF /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		FD4F065314E7281300A3B8FF /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		FD4F065414E7281300A3B8FF /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		FD4F065814E7288700A3B8FF /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		FD4F065914E7288700A3B8FF /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		FD4F066514E7298400A3B8FF /* SynthesizeSingleton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SynthesizeSingleton.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		FD4F05FF14E7271200A3B8FF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FD4F060714E7271200A3B8FF /* UIKit.framework in Frameworks */,
+				FD4F060914E7271200A3B8FF /* Foundation.framework in Frameworks */,
+				FD4F060B14E7271200A3B8FF /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		FD4F05F714E7271200A3B8FF = {
+			isa = PBXGroup;
+			children = (
+				FD4F060C14E7271200A3B8FF /* SkyEPG */,
+				FD4F060514E7271200A3B8FF /* Frameworks */,
+				FD4F060314E7271200A3B8FF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FD4F060314E7271200A3B8FF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FD4F060214E7271200A3B8FF /* SkyEPG.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FD4F060514E7271200A3B8FF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FD4F060614E7271200A3B8FF /* UIKit.framework */,
+				FD4F060814E7271200A3B8FF /* Foundation.framework */,
+				FD4F060A14E7271200A3B8FF /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FD4F060C14E7271200A3B8FF /* SkyEPG */ = {
+			isa = PBXGroup;
+			children = (
+				FD4F065714E7287700A3B8FF /* Model */,
+				FD4F065114E727F300A3B8FF /* TVGuideViewController */,
+				FD4F065014E727EB00A3B8FF /* LoginViewController */,
+				FD4F064F14E727D600A3B8FF /* ThirdParty */,
+				FD4F061514E7271200A3B8FF /* AppDelegate.h */,
+				FD4F061614E7271200A3B8FF /* AppDelegate.m */,
+				FD4F061B14E7271200A3B8FF /* first.png */,
+				FD4F061D14E7271200A3B8FF /* first@2x.png */,
+				FD4F061814E7271200A3B8FF /* FirstViewController.h */,
+				FD4F061914E7271200A3B8FF /* FirstViewController.m */,
+				FD4F061F14E7271200A3B8FF /* SecondViewController.h */,
+				FD4F062014E7271200A3B8FF /* SecondViewController.m */,
+				FD4F062214E7271200A3B8FF /* second.png */,
+				FD4F062414E7271200A3B8FF /* second@2x.png */,
+				FD4F062614E7271200A3B8FF /* FirstViewController.xib */,
+				FD4F062914E7271200A3B8FF /* SecondViewController.xib */,
+				FD4F060D14E7271200A3B8FF /* Supporting Files */,
+			);
+			path = SkyEPG;
+			sourceTree = "<group>";
+		};
+		FD4F060D14E7271200A3B8FF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FD4F060E14E7271200A3B8FF /* SkyEPG-Info.plist */,
+				FD4F060F14E7271200A3B8FF /* InfoPlist.strings */,
+				FD4F061214E7271200A3B8FF /* main.m */,
+				FD4F061414E7271200A3B8FF /* SkyEPG-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FD4F063114E7273000A3B8FF /* AFNetworking */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AFNetworking;
+			sourceTree = "<group>";
+		};
+		FD4F064714E727A500A3B8FF /* JSONKit */ = {
+			isa = PBXGroup;
+			children = (
+				FD4F064814E727A500A3B8FF /* CHANGELOG.md */,
+				FD4F064914E727A500A3B8FF /* JSONKit.h */,
+				FD4F064A14E727A500A3B8FF /* JSONKit.m */,
+				FD4F064B14E727A500A3B8FF /* README.md */,
+			);
+			path = JSONKit;
+			sourceTree = "<group>";
+		};
+		FD4F064F14E727D600A3B8FF /* ThirdParty */ = {
+			isa = PBXGroup;
+			children = (
+				FD4F066514E7298400A3B8FF /* SynthesizeSingleton.h */,
+				FD4F064714E727A500A3B8FF /* JSONKit */,
+				FD4F063114E7273000A3B8FF /* AFNetworking */,
+			);
+			name = ThirdParty;
+			sourceTree = "<group>";
+		};
+		FD4F065014E727EB00A3B8FF /* LoginViewController */ = {
+			isa = PBXGroup;
+			children = (
+				FD4F065214E7281300A3B8FF /* LoginViewController.h */,
+				FD4F065314E7281300A3B8FF /* LoginViewController.m */,
+				FD4F065414E7281300A3B8FF /* LoginViewController.xib */,
+			);
+			name = LoginViewController;
+			sourceTree = "<group>";
+		};
+		FD4F065114E727F300A3B8FF /* TVGuideViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = TVGuideViewController;
+			sourceTree = "<group>";
+		};
+		FD4F065714E7287700A3B8FF /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FD4F065814E7288700A3B8FF /* User.h */,
+				FD4F065914E7288700A3B8FF /* User.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		FD4F060114E7271200A3B8FF /* SkyEPG */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FD4F062E14E7271200A3B8FF /* Build configuration list for PBXNativeTarget "SkyEPG" */;
+			buildPhases = (
+				FD4F05FE14E7271200A3B8FF /* Sources */,
+				FD4F05FF14E7271200A3B8FF /* Frameworks */,
+				FD4F060014E7271200A3B8FF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SkyEPG;
+			productName = SkyEPG;
+			productReference = FD4F060214E7271200A3B8FF /* SkyEPG.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		FD4F05F914E7271200A3B8FF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
+			buildConfigurationList = FD4F05FC14E7271200A3B8FF /* Build configuration list for PBXProject "SkyEPG" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = FD4F05F714E7271200A3B8FF;
+			productRefGroup = FD4F060314E7271200A3B8FF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FD4F060114E7271200A3B8FF /* SkyEPG */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		FD4F060014E7271200A3B8FF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FD4F061114E7271200A3B8FF /* InfoPlist.strings in Resources */,
+				FD4F061C14E7271200A3B8FF /* first.png in Resources */,
+				FD4F061E14E7271200A3B8FF /* first@2x.png in Resources */,
+				FD4F062314E7271200A3B8FF /* second.png in Resources */,
+				FD4F062514E7271200A3B8FF /* second@2x.png in Resources */,
+				FD4F062814E7271200A3B8FF /* FirstViewController.xib in Resources */,
+				FD4F062B14E7271200A3B8FF /* SecondViewController.xib in Resources */,
+				FD4F064C14E727A500A3B8FF /* CHANGELOG.md in Resources */,
+				FD4F064E14E727A500A3B8FF /* README.md in Resources */,
+				FD4F065614E7281300A3B8FF /* LoginViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		FD4F05FE14E7271200A3B8FF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FD4F061314E7271200A3B8FF /* main.m in Sources */,
+				FD4F061714E7271200A3B8FF /* AppDelegate.m in Sources */,
+				FD4F061A14E7271200A3B8FF /* FirstViewController.m in Sources */,
+				FD4F062114E7271200A3B8FF /* SecondViewController.m in Sources */,
+				FD4F064D14E727A500A3B8FF /* JSONKit.m in Sources */,
+				FD4F065514E7281300A3B8FF /* LoginViewController.m in Sources */,
+				FD4F065A14E7288700A3B8FF /* User.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		FD4F060F14E7271200A3B8FF /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FD4F061014E7271200A3B8FF /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		FD4F062614E7271200A3B8FF /* FirstViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FD4F062714E7271200A3B8FF /* en */,
+			);
+			name = FirstViewController.xib;
+			sourceTree = "<group>";
+		};
+		FD4F062914E7271200A3B8FF /* SecondViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				FD4F062A14E7271200A3B8FF /* en */,
+			);
+			name = SecondViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		FD4F062C14E7271200A3B8FF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		FD4F062D14E7271200A3B8FF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		FD4F062F14E7271200A3B8FF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SkyEPG/SkyEPG-Prefix.pch";
+				INFOPLIST_FILE = "SkyEPG/SkyEPG-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		FD4F063014E7271200A3B8FF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SkyEPG/SkyEPG-Prefix.pch";
+				INFOPLIST_FILE = "SkyEPG/SkyEPG-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		FD4F05FC14E7271200A3B8FF /* Build configuration list for PBXProject "SkyEPG" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FD4F062C14E7271200A3B8FF /* Debug */,
+				FD4F062D14E7271200A3B8FF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FD4F062E14E7271200A3B8FF /* Build configuration list for PBXNativeTarget "SkyEPG" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FD4F062F14E7271200A3B8FF /* Debug */,
+				FD4F063014E7271200A3B8FF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = FD4F05F914E7271200A3B8FF /* Project object */;
+}

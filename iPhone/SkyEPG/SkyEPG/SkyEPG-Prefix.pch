@@ -1,0 +1,20 @@
+//
+// Prefix header for all source files of the 'SkyEPG' target in the 'SkyEPG' project
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_4_0
+#warning "This project uses features only available in iOS SDK 4.0 and later."
+#endif
+
+
+#define PREF_EMAIL          @"PREF_EMAIL"
+#define PREF_AUTOLOGIN		@"PREF_AUTOLOGIN"
+#define PREF_TOKEN			@"PREF_TOKEN"
+
+
+#ifdef __OBJC__
+    #import <UIKit/UIKit.h>
+    #import <Foundation/Foundation.h>
+#endif
