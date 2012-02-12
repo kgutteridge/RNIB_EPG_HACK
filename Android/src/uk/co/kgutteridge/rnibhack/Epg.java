@@ -22,23 +22,6 @@ public class Epg extends Activity implements RetrieverCallback {
     private Context mContext;
     
 	String url = "http://epgservices.sky.com/tvlistings-proxy/TVListingsProxy/init.json";
-	
-    private String[] mStrings = {
-            "Match of the Day : Sky sports",
-            "News : BBC",
-            "Emmerdale : ITV",
-            "IT Crowd : CH4",
-            "----------",
-            "----------",
-            "----------",
-            "----------",
-            "----------",
-            "----------",
-            "----------",
-            "----------",
-            "----------",
-            "----------"
-    };
 
 	private ServicesMgr servicesMgr = new ServicesMgr(this);
 
@@ -51,26 +34,26 @@ public class Epg extends Activity implements RetrieverCallback {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.act_epg);
         lv = (ListView)findViewById(R.id.list);
-        servicesMgr.update();        
     }
     
     @Override
     protected void onResume() {
     	super.onResume();
 		channelAdapter = new ChannelAdapter(this, servicesMgr);
+		lv.setAdapter(channelAdapter);
+        servicesMgr.update(); 
     }
     
     private class ChannelAdapter extends BaseAdapter {
-    	
-    	ServicesMgr servicesMgr;
+    	private ServicesMgr mgr;
     	
         public ChannelAdapter(Context context, ServicesMgr mgr) {
-        	this.servicesMgr = mgr;
+        	this.mgr=mgr;
             mContext = context;
         }
 
         public int getCount() {
-            return servicesMgr.channelsRetrieved.size() - 1;
+            return servicesMgr.channelsRetrieved.size();
         }
 
         public Object getItem(int position) {
@@ -95,16 +78,11 @@ public class Epg extends Activity implements RetrieverCallback {
     }
 
 	public void onDownloadSuccess(ArrayList<Channels> result) {
-		Log.i("TAG", "result size= " + result.size());
 		
 		if(result.size() > 0){
 			servicesMgr.updateResults((ArrayList<Channels>) result);
-			Log.i("TAG", "The mgr results are not empty " + servicesMgr.channelsRetrieved.size());
-			if (lv.getAdapter()==null){
-				lv.setAdapter(channelAdapter);
-			}else{
-				channelAdapter.notifyDataSetChanged();
-			}
+			channelAdapter.notifyDataSetChanged();
+			
 		} else{
 //			hashText.setText(R.string.results_empty_title);
 		}

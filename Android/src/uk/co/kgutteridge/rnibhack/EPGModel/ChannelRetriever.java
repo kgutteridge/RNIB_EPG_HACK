@@ -1,12 +1,19 @@
 package uk.co.kgutteridge.rnibhack.EPGModel;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
+import java.io.Writer;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Iterator;
 
 import uk.co.kgutteridge.app.EPGApp;
+import uk.co.kgutteridge.rnibhack.R;
 import android.app.Application;
 import android.content.Intent;
 import android.net.Uri;
@@ -40,10 +47,8 @@ public class ChannelRetriever {
 	private final ResultHandler channelResponseHandler = new ResultHandler() {
 		@Override
 		public void onSuccess(int resultCode, byte[] array) throws IOException {
-			Log.i("TAG", "result came back successful");
+			
 			ChannelResponse response = new Gson().fromJson(new String(array), ChannelResponse.class);  
-			Log.i("TAG", "channels " + response.channels.size());
-
 			ArrayList<Channels> channelsRetrieved = new ArrayList<Channels>();
 				Iterator<Channels> i = response.channels.iterator();
 				while (i.hasNext()) {
@@ -90,13 +95,53 @@ public class ChannelRetriever {
 
 	private void retrieveChannelStream() {
 		Log.i("TAG", "retrieving channels from retriever");
-		Intent intent = new ServiceIntentBuilder(
-				(Application) EPGApp.getContext())
-				.setHttpType(HttpIntentService.SERVICE_TYPE_GET)
-				.setData(Uri.withAppendedPath(Uri.parse(BASE_URL), CHANNELS_API))
-				.withParam(Params.QUERY, sanitizeString(""))
-				.setResultReceiver(channelResponseHandler).build();
-		EPGApp.getContext().startService(intent);
+//		Intent intent = new ServiceIntentBuilder(
+//				(Application) EPGApp.getContext())
+//				.setHttpType(HttpIntentService.SERVICE_TYPE_GET)
+//				.setData(Uri.withAppendedPath(Uri.parse(BASE_URL), CHANNELS_API))
+//				.withParam(Params.QUERY, sanitizeString(""))
+//				.setResultReceiver(channelResponseHandler).build();
+//		EPGApp.getContext().startService(intent);
+		
+		//Canned response.
+		InputStream is = EPGApp.getContext().getResources().openRawResource(R.raw.init);
+		Writer writer = new StringWriter();
+		char[] buffer = new char[1024];
+		try {
+		    Reader reader = null;
+			try {
+				reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+			} catch (UnsupportedEncodingException e) {
+				e.printStackTrace();
+			}
+		    int n;
+		    try {
+				while ((n = reader.read(buffer)) != -1) {
+				    writer.write(buffer, 0, n);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} finally {
+		    try {
+				is.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		String jsonString = writer.toString();
+		
+		ChannelResponse response = new Gson().fromJson(jsonString, ChannelResponse.class);  
+		ArrayList<Channels> channelsRetrieved = new ArrayList<Channels>();
+			Iterator<Channels> i = response.channels.iterator();
+			while (i.hasNext()) {
+				Channels res = (Channels) i.next();
+				channelsRetrieved.add(res);
+			}
+	        
+		callback.onDownloadSuccess(channelsRetrieved);
+		
 	}
 	
 	private String sanitizeString(String s) {
