@@ -10,5 +10,19 @@
 
 @implementation Channel
 
+@synthesize channelNo, epgGenre, title, channelType, channelID, genre;
+
+-(void)dealloc
+{
+    self.channelNo = nil;
+    self.epgGenre = nil;
+    self.title = nil;
+    self.channelType = nil;
+    self.channelID = nil;
+    self.genre =nil;
+    
+    [super dealloc];
+}
+
 
 @end

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FD0D49E814E77D7000D1605D /* TVGuideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FD0D49E614E77D7000D1605D /* TVGuideViewController.m */; };
+		FD0D49E914E77D7000D1605D /* TVGuideViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD0D49E714E77D7000D1605D /* TVGuideViewController.xib */; };
 		FD3C568014E73CE400190670 /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = FD3C566C14E73CE400190670 /* AFHTTPClient.m */; };
 		FD3C568114E73CE400190670 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = FD3C566E14E73CE400190670 /* AFHTTPRequestOperation.m */; };
 		FD3C568214E73CE400190670 /* AFImageRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = FD3C567014E73CE400190670 /* AFImageRequestOperation.m */; };
@@ -18,6 +20,8 @@
 		FD3C568814E73CE400190670 /* AFXMLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = FD3C567D14E73CE400190670 /* AFXMLRequestOperation.m */; };
 		FD3C568914E73CE400190670 /* UIImageView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = FD3C567F14E73CE400190670 /* UIImageView+AFNetworking.m */; };
 		FD3C569014E7403A00190670 /* Channel.m in Sources */ = {isa = PBXBuildFile; fileRef = FD3C568F14E7403A00190670 /* Channel.m */; };
+		FD3C569414E742BC00190670 /* DefaultTable.m in Sources */ = {isa = PBXBuildFile; fileRef = FD3C569214E742BC00190670 /* DefaultTable.m */; };
+		FD3C569514E742BC00190670 /* DefaultTable.xib in Resources */ = {isa = PBXBuildFile; fileRef = FD3C569314E742BC00190670 /* DefaultTable.xib */; };
 		FD4F060714E7271200A3B8FF /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD4F060614E7271200A3B8FF /* UIKit.framework */; };
 		FD4F060914E7271200A3B8FF /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD4F060814E7271200A3B8FF /* Foundation.framework */; };
 		FD4F060B14E7271200A3B8FF /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD4F060A14E7271200A3B8FF /* CoreGraphics.framework */; };
@@ -41,6 +45,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FD0D49E514E77D7000D1605D /* TVGuideViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TVGuideViewController.h; sourceTree = "<group>"; };
+		FD0D49E614E77D7000D1605D /* TVGuideViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TVGuideViewController.m; sourceTree = "<group>"; };
+		FD0D49E714E77D7000D1605D /* TVGuideViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TVGuideViewController.xib; sourceTree = "<group>"; };
 		FD3C566B14E73CE400190670 /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
 		FD3C566C14E73CE400190670 /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPClient.m; sourceTree = "<group>"; };
 		FD3C566D14E73CE400190670 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -64,6 +71,9 @@
 		FD3C567F14E73CE400190670 /* UIImageView+AFNetworking.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+AFNetworking.m"; sourceTree = "<group>"; };
 		FD3C568E14E7403A00190670 /* Channel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Channel.h; sourceTree = "<group>"; };
 		FD3C568F14E7403A00190670 /* Channel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Channel.m; sourceTree = "<group>"; };
+		FD3C569114E742BC00190670 /* DefaultTable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DefaultTable.h; sourceTree = "<group>"; };
+		FD3C569214E742BC00190670 /* DefaultTable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DefaultTable.m; sourceTree = "<group>"; };
+		FD3C569314E742BC00190670 /* DefaultTable.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultTable.xib; sourceTree = "<group>"; };
 		FD4F060214E7271200A3B8FF /* SkyEPG.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SkyEPG.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FD4F060614E7271200A3B8FF /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		FD4F060814E7271200A3B8FF /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -185,6 +195,9 @@
 				FD4F062614E7271200A3B8FF /* FirstViewController.xib */,
 				FD4F062914E7271200A3B8FF /* SecondViewController.xib */,
 				FD4F060D14E7271200A3B8FF /* Supporting Files */,
+				FD3C569114E742BC00190670 /* DefaultTable.h */,
+				FD3C569214E742BC00190670 /* DefaultTable.m */,
+				FD3C569314E742BC00190670 /* DefaultTable.xib */,
 			);
 			path = SkyEPG;
 			sourceTree = "<group>";
@@ -234,6 +247,9 @@
 		FD4F065114E727F300A3B8FF /* TVGuideViewController */ = {
 			isa = PBXGroup;
 			children = (
+				FD0D49E514E77D7000D1605D /* TVGuideViewController.h */,
+				FD0D49E614E77D7000D1605D /* TVGuideViewController.m */,
+				FD0D49E714E77D7000D1605D /* TVGuideViewController.xib */,
 			);
 			name = TVGuideViewController;
 			sourceTree = "<group>";
@@ -309,6 +325,8 @@
 				FD4F064C14E727A500A3B8FF /* CHANGELOG.md in Resources */,
 				FD4F064E14E727A500A3B8FF /* README.md in Resources */,
 				FD4F065614E7281300A3B8FF /* LoginViewController.xib in Resources */,
+				FD3C569514E742BC00190670 /* DefaultTable.xib in Resources */,
+				FD0D49E914E77D7000D1605D /* TVGuideViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,6 +355,8 @@
 				FD3C568814E73CE400190670 /* AFXMLRequestOperation.m in Sources */,
 				FD3C568914E73CE400190670 /* UIImageView+AFNetworking.m in Sources */,
 				FD3C569014E7403A00190670 /* Channel.m in Sources */,
+				FD3C569414E742BC00190670 /* DefaultTable.m in Sources */,
+				FD0D49E814E77D7000D1605D /* TVGuideViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
