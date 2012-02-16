@@ -142,6 +142,7 @@ public class Epg extends Activity implements ChannelsRetrievedCallback, Programe
 		programmeDetails.putExtra(BUNDLE_PROG_TIME, channelServicesMgr.channels.get(position).programmes.get(0).start);
 		programmeDetails.putExtra(BUNDLE_PROG_TITLE, channelServicesMgr.channels.get(position).programmes.get(0).title);
 		programmeDetails.putExtra(BUNDLE_PROG_DESC, channelServicesMgr.channels.get(position).programmes.get(0).shortDesc);
+//		programmeDetails.putExtra(BUNDLE_PROG_CHANNEL_NO, channelServicesMgr.channels.get(position));
 		startActivity(programmeDetails);
 	}
 

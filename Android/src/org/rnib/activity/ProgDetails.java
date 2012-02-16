@@ -50,7 +50,6 @@ public class ProgDetails extends Activity implements ChannelsRetrievedCallback {
 		
 		txt = (TextView) findViewById(R.id.prog_details_time);
 		String time = intent.getStringExtra(Epg.BUNDLE_PROG_TIME);
-		txt.setContentDescription(Epg.BUNDLE_PROG_TIME);
 		time = time.subSequence(0, time.length()-3).toString();
 		
 		Date expiry = new Date(Long.parseLong(time) * 1000);

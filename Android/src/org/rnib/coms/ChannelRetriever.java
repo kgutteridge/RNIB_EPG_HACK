@@ -16,9 +16,14 @@ import org.rnib.R;
 import org.rnib.app.SkyEPG;
 import org.rnib.model.channels.Channel;
 
+import android.app.Application;
+import android.content.Intent;
+import android.net.Uri;
 import android.util.Log;
 
+import com.akshay.http.service.HttpIntentService;
 import com.akshay.http.service.ResultHandler;
+import com.akshay.http.service.builders.ServiceIntentBuilder;
 import com.akshay.http.service.constants.HttpStatusCodes;
 import com.google.gson.Gson;
 
@@ -47,14 +52,30 @@ public class ChannelRetriever {
 			
 			ChannelResponse response = new Gson().fromJson(new String(array), ChannelResponse.class);  
 			ArrayList<Channel> channelsRetrieved = new ArrayList<Channel>();
-			Iterator<Channel> i = response.channels.iterator();
-			while (i.hasNext()) {
-				Channel res = (Channel) i.next();
-				Log.i("TAG", "channel " + res.title);
-				channelsRetrieved.add(res);
-			}
-		       
+				Iterator<Channel> i = response.channels.iterator();
+				while (i.hasNext()) {
+					Channel channel = (Channel) i.next();
+		            if(channelsVar==null){
+		            		channelsVar = channel.channelID;
+	            	}else{
+	            		channelsVar = channel.channelID + ", "+ channel.channelID;
+	            	}
+					channelsRetrieved.add(channel);
+				}
+		        
 			callback.onChannelsDownloadedSuccess(channelsRetrieved);
+			
+			
+//			ChannelResponse response = new Gson().fromJson(new String(array), ChannelResponse.class);  
+//			ArrayList<Channel> channelsRetrieved = new ArrayList<Channel>();
+//			Iterator<Channel> i = response.channels.iterator();
+//			while (i.hasNext()) {
+//				Channel res = (Channel) i.next();
+//				Log.i("TAG", "channel " + res.title);
+//				channelsRetrieved.add(res);
+//			}
+//		       
+//			callback.onChannelsDownloadedSuccess(channelsRetrieved);
 		}
 
 		@Override
@@ -92,57 +113,57 @@ public class ChannelRetriever {
 	
 	private void retrieveChannelStream() {
 		Log.i("TAG", "retrieving channels from retriever");
-//		Intent intent = new ServiceIntentBuilder(
-//				(Application) EPGApp.getContext())
-//				.setHttpType(HttpIntentService.SERVICE_TYPE_GET)
-//				.setData(Uri.withAppendedPath(Uri.parse(BASE_URL), CHANNELS_API))
-//				.withParam(Params.QUERY, sanitizeString(""))
-//				.setResultReceiver(channelResponseHandler).build();
-//		EPGApp.getContext().startService(intent);
+		Intent intent = new ServiceIntentBuilder(
+				(Application) SkyEPG.getContext())
+				.setHttpType(HttpIntentService.SERVICE_TYPE_GET)
+				.setData(Uri.withAppendedPath(Uri.parse(BASE_URL), CHANNELS_API))
+				.withParam(Params.QUERY, sanitizeString(""))
+				.setResultReceiver(channelResponseHandler).build();
+		SkyEPG.getContext().startService(intent);
 		
 		//Canned response.
-		InputStream is = SkyEPG.getContext().getResources().openRawResource(R.raw.init);
-		Writer writer = new StringWriter();
-		char[] buffer = new char[1024];
-		try {
-		    Reader reader = null;
-			try {
-				reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
-			} catch (UnsupportedEncodingException e) {
-				e.printStackTrace();
-			}
-		    int n;
-		    try {
-				while ((n = reader.read(buffer)) != -1) {
-				    writer.write(buffer, 0, n);
-				}
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		} finally {
-		    try {
-				is.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-
-		String jsonString = writer.toString();
-		
-		ChannelResponse response = new Gson().fromJson(jsonString, ChannelResponse.class);  
-		ArrayList<Channel> channelsRetrieved = new ArrayList<Channel>();
-			Iterator<Channel> i = response.channels.iterator();
-			while (i.hasNext()) {
-				Channel channel = (Channel) i.next();
-	            if(channelsVar==null){
-	            		channelsVar = channel.channelID;
-            	}else{
-            		channelsVar = channel.channelID + ", "+ channel.channelID;
-            	}
-				channelsRetrieved.add(channel);
-			}
-	        
-		callback.onChannelsDownloadedSuccess(channelsRetrieved);
+//		InputStream is = SkyEPG.getContext().getResources().openRawResource(R.raw.init);
+//		Writer writer = new StringWriter();
+//		char[] buffer = new char[1024];
+//		try {
+//		    Reader reader = null;
+//			try {
+//				reader = new BufferedReader(new InputStreamReader(is, "UTF-8"));
+//			} catch (UnsupportedEncodingException e) {
+//				e.printStackTrace();
+//			}
+//		    int n;
+//		    try {
+//				while ((n = reader.read(buffer)) != -1) {
+//				    writer.write(buffer, 0, n);
+//				}
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+//		} finally {
+//		    try {
+//				is.close();
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+//		}
+//
+//		String jsonString = writer.toString();
+		SkyEPG.getContext().startService(intent);
+//		ChannelResponse response = new Gson().fromJson(jsonString, ChannelResponse.class);  
+//		ArrayList<Channel> channelsRetrieved = new ArrayList<Channel>();
+//			Iterator<Channel> i = response.channels.iterator();
+//			while (i.hasNext()) {
+//				Channel channel = (Channel) i.next();
+//	            if(channelsVar==null){
+//	            		channelsVar = channel.channelID;
+//            	}else{
+//            		channelsVar = channel.channelID + ", "+ channel.channelID;
+//            	}
+//				channelsRetrieved.add(channel);
+//			}
+//	        
+//		callback.onChannelsDownloadedSuccess(channelsRetrieved);
 	}
 	
 	private String sanitizeString(String s) {
